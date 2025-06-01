@@ -1,0 +1,94 @@
+<app-header></app-header>
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1 class="dashboard-title">Kỳ thi của tôi</h1>
+    <div class="actions-container">
+      <div class="search-wrapper">
+        <input type="text" placeholder="Tìm kiếm kỳ thi..." [(ngModel)]="searchTerm" (keyup)="filterExams()">
+        <i class="search-icon fa fa-search"></i>
+      </div>
+      <button class="create-btn" (click)="navigateToCreateExam()">
+        <i class="fa fa-plus"></i> Tạo kỳ thi mới
+      </button>
+    </div>
+  </div>
+
+  <div class="filter-tabs">
+    <button class="tab-btn" [class.active]="currentFilter === 'all'" (click)="applyFilter('all')">Tất cả</button>
+    <button class="tab-btn" [class.active]="currentFilter === 'active'" (click)="applyFilter('active')">Đang diễn ra</button>
+    <button class="tab-btn" [class.active]="currentFilter === 'upcoming'" (click)="applyFilter('upcoming')">Sắp diễn ra</button>
+    <button class="tab-btn" [class.active]="currentFilter === 'completed'" (click)="applyFilter('completed')">Đã kết thúc</button>
+  </div>
+
+  <div class="exam-cards-container">
+    <div class="no-exams" *ngIf="filteredExams.length === 0">
+      <i class="fa fa-search"></i>
+      <h3>Không tìm thấy đề thi</h3>
+      <p>Thử tìm kiếm với từ khóa khác hoặc tạo đề thi mới</p>
+    </div>
+
+      <div class="exam-card" *ngFor="let examSession of filteredExams"
+           (click)="navigateExamSessionDashBoard(examSession)">
+        <div class="card-header">
+          <span class="status-badge" [ngClass]="getStatusClassForExam(examSession)">
+            <i class="fa" [ngClass]="{
+              'fa-play-circle': getExamStatus(examSession) === 'active',
+              'fa-solid fa-clock': getExamStatus(examSession) === 'upcoming',
+              'fa-check-circle': getExamStatus(examSession) === 'completed'
+            }"></i>
+            {{ getStatusLabel(examSession) }}
+          </span>
+          <span class="code-badge">Mã: {{ examSession.code }}</span>
+        </div>
+
+        <div class="card-content">
+          <h2 class="exam-title">{{ examSession.name }}</h2>
+          <p class="exam-description">{{ examSession.description }}</p>
+
+          <div class="card-details">
+            <div class="detail-item">
+              <i class="fa fa-calendar"></i>
+              <div>
+                <span class="detail-label">Ngày tạo</span>
+                <span class="detail-value">{{ examSession.createDate | date: 'dd/MM/yyyy' }}</span>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <i class="fa fa-hourglass-start"></i>
+              <div>
+                <span class="detail-label">Bắt đầu</span>
+                <span class="detail-value">{{ examSession.startDate | date: 'dd/MM/yyyy HH:mm' }}</span>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <i class="fa fa-times "></i>
+              <div>
+                <span class="detail-label">Kết thúc</span>
+                <span class="detail-value">{{ examSession.endDate | date: 'dd/MM/yyyy HH:mm' }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <button class="view-btn">Xem chi tiết</button>
+            <button class="delete-btn" (click)="confirmDelete($event, examSession.id)">
+              <i class="fa fa-trash"></i> Xóa
+            </button>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div class="confirmation-modal" *ngIf="showDeleteConfirmation">
+  <div class="confirmation-content">
+    <h3>Xác nhận xóa</h3>
+    <p>Bạn có chắc chắn muốn xóa kỳ thi này không?</p>
+    <div class="confirmation-buttons">
+      <button class="cancel-btn" (click)="cancelDelete()">Hủy</button>
+      <button class="confirm-btn" (click)="proceedWithDelete()">Xóa</button>
+    </div>
+  </div>
+</div>

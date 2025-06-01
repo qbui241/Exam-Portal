@@ -1,0 +1,428 @@
+// Modern color palette - Blue theme
+      $primary-blue: #1976d2;
+      $primary-dark-blue: #0d47a1;
+      $primary-light-blue: #bbdefb;
+      $secondary-blue: #64b5f6;
+      $text-dark: #333333;
+      $text-light: #ffffff;
+      $text-gray: #757575;
+      $bg-light: #f8f9fa;
+      $bg-white: #ffffff;
+      $border-color: #e0e0e0;
+      $success-color: #4caf50;
+      $warning-color: #ff9800;
+      $error-color: #f44336;
+      $card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      $border-radius-sm: 0.4rem;
+      $border-radius: 0.6rem;
+      $border-radius-lg: 0.8rem;
+      $transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+      body {
+        font-family: 'Inter', system-ui, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: $bg-light;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: $text-dark;
+        line-height: 1.6;
+        font-size: 1.6rem;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 25px;
+        position: relative;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(255, 255, 255, 0.7);
+          z-index: -1;
+          border-radius: $border-radius-lg;
+        }
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid $border-color;
+
+        h1 {
+          font-size: 2.5rem;
+          font-weight: 600;
+          color: $primary-dark-blue;
+          margin: 0;
+        }
+
+        .svg-icon {
+          cursor: pointer;
+          fill: $primary-blue;
+          transition: $transition;
+          padding: 0.8rem;
+          border-radius: 50%;
+          background: rgba($primary-blue, 0.1);
+
+          &:hover {
+            background: rgba($primary-blue, 0.2);
+            transform: translateX(-3px);
+          }
+        }
+      }
+
+      .content {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .profile {
+        display: flex;
+        margin-bottom: 30px;
+        background-color: $bg-white;
+        border-radius: 12px;
+        box-shadow: $card-shadow;
+        padding: 25px 25px 60px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .avatar {
+          width: 90px;
+          height: 90px;
+          border-radius: 50%;
+          margin-right: 25px;
+          object-fit: cover;
+          border: 3px solid $primary-blue;
+          transition: $transition;
+        }
+
+        .profile-info {
+          flex: 1;
+          padding-top: 10px;
+
+          .profile-name {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: $text-dark;
+          }
+
+          .change-profile-pic {
+            color: $primary-blue;
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
+            padding: 6px 0;
+            position: relative;
+            overflow: hidden;
+
+            &::after {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 0;
+              height: 2px;
+              background-color: $primary-blue;
+              transition: width 0.4s ease;
+            }
+
+            &:hover {
+              color: darken($primary-blue, 10%);
+              transform: translateY(-2px);
+              text-shadow: 0 2px 10px rgba($primary-blue, 0.2);
+
+              &::after {
+                width: 100%;
+                box-shadow: 0 1px 3px rgba($primary-blue, 0.4);
+              }
+            }
+
+            &:active {
+              transform: translateY(0);
+            }
+          }
+        }
+      }
+
+      #role {
+        position: absolute;
+        top: calc(90px + 25px + 10px); // Avatar height + padding + margin
+        bottom: 20px;
+        left: 25px; // Same as profile padding
+        width: 90px; // Match avatar width
+        text-align: center;
+
+        h4 {
+          display: inline-block;
+          padding: 6px 14px;
+          background-color: rgba($primary-blue, 0.1);
+          border: 1px solid rgba($primary-blue, 0.2);
+          border-radius: 20px;
+          color: $primary-blue;
+          font-size: 1.2rem;
+          font-weight: 500;
+          margin: 0;
+          white-space: nowrap;
+          box-shadow: 0 2px 4px rgba($primary-blue, 0.1);
+          transition: $transition;
+
+          &:hover {
+            background-color: rgba($primary-blue, 0.15);
+            transform: translateY(-2px);
+          }
+        }
+      }
+
+      .personal-info-section,
+      .account-info-section {
+        margin-bottom: 30px;
+        background-color: $bg-white;
+        border-radius: 12px;
+        box-shadow: $card-shadow;
+        padding: 25px;
+        transition: transform 0.3s, box-shadow 0.3s;
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+          font-size: 2.2rem;
+          font-weight: 700;
+          margin-bottom: 25px;
+          color: $primary-dark-blue;
+          padding: 12px 0 15px 18px;
+          border-bottom: 2px solid $primary-blue;
+          position: relative;
+          letter-spacing: 0.03rem;
+          background: linear-gradient(to right, rgba($primary-blue, 0.05), transparent 80%);
+          border-radius: 4px;
+          transition: $transition;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+          &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 28px;
+            background-color: $primary-blue;
+            border-radius: 3px;
+          }
+
+          &:hover {
+            transform: translateX(3px);
+            background: linear-gradient(to right, rgba($primary-blue, 0.08), transparent 90%);
+          }
+        }
+
+        .form-group {
+          margin-bottom: 20px;
+
+          label {
+            display: block;
+            margin-bottom: 3px; // Reduced from 10px to position closer to input
+            font-weight: 600;
+            color: #072d67;
+            font-size: 1.5rem;
+            letter-spacing: 0.02rem;
+            transition: $transition-fast;
+            position: relative;
+            padding: 5px 12px 3px; // Reduced vertical padding
+            border-radius: 5px;
+            background: linear-gradient(to right, rgba($primary-blue, 0.02), transparent 95%);
+
+            &:hover {
+              transform: translateX(3px);
+              background: linear-gradient(to right, rgba($primary-blue, 0.05), transparent);
+              color: darken($primary-dark-blue, 5%);
+            }
+          }
+
+          input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid $border-color;
+            border-radius: 8px;
+            font-size: 1.4rem;
+            transition: $transition;
+            box-sizing: border-box;
+
+            &::placeholder {
+              color: $text-gray;
+            }
+
+            &:hover {
+              border-color: $secondary-blue;
+            }
+
+            &:focus {
+              outline: none;
+              border-color: $primary-blue;
+              box-shadow: 0 0 0 3px rgba($primary-blue, 0.2);
+              transform: translateY(-2px);
+            }
+          }
+        }
+
+        .form-row {
+          display: flex;
+          gap: 15px;
+
+          .form-group {
+            flex: 1;
+          }
+        }
+
+        .btn {
+          width: 100%;
+          padding: 12px 20px;
+          background-color: $primary-blue;
+          color: $text-light;
+          border: none;
+          border-radius: 8px;
+          font-size: 1.4rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: $transition;
+
+          &:hover {
+            background-color: $primary-dark-blue;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba($primary-blue, 0.3);
+          }
+
+          &:active {
+            transform: scale(0.98);
+          }
+        }
+      }
+
+      .change-password-section {
+        margin-top: 25px;
+        padding-top: 25px;
+        border-top: 1px solid $border-color;
+
+        h4 {
+          font-size: 1.8rem;
+          font-weight: 600;
+          margin-bottom: 22px;
+          color: $primary-dark-blue;
+          position: relative;
+          padding: 8px 12px;
+          letter-spacing: 0.02rem;
+          background: linear-gradient(to right, rgba($text-dark, 0.03), transparent 90%);
+          border-radius: 5px;
+          transition: $transition-fast;
+
+          &:hover {
+            transform: translateX(3px);
+            background: linear-gradient(to right, rgba($text-dark, 0.05), transparent 95%);
+          }
+        }
+
+        .btn-change-password {
+          background-color: $text-dark;
+
+          &:hover {
+            background-color: darken($text-dark, 10%);
+          }
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 15px;
+          margin: 10px;
+        }
+
+        .personal-info-section,
+        .account-info-section {
+          padding: 20px 15px;
+
+          h2 {
+            font-size: 1.8rem;
+            padding-left: 15px;
+
+            &::before {
+              height: 24px;
+            }
+          }
+        }
+
+        header h1 {
+          font-size: 2.2rem;
+        }
+
+        .form-row {
+          flex-direction: column;
+          gap: 0;
+        }
+
+        .profile {
+          flex-direction: column;
+          text-align: center;
+          padding: 20px 15px;
+
+          .avatar {
+            margin-right: 0;
+            margin-bottom: 45px;
+          }
+
+          .profile-info {
+            width: 100%;
+          }
+        }
+
+        #role {
+          position: absolute;
+          top: auto;
+          bottom: calc(100% - 130px);
+          left: 50%;
+          transform: translateX(-50%);
+          width: auto;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .personal-info-section,
+      .account-info-section {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+
+      .account-info-section {
+        animation-delay: 0.1s;
+      }

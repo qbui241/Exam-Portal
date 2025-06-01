@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a7bff; /* Lighter blue */
+            --secondary-color: #7b68ee; /* Lighter purple */
+            --accent-color: #4ecdc4; /* Brighter teal */
+            --light-bg: #ffffff; /* Pure white background */
+            --dark-text: #3a4b66; /* Lighter dark text */
+            --light-text: #7c8ba1; /* Lighter text */
+            --border-color: #edf2f7; /* Lighter border */
+            --success-color: #10b981; /* Light green */
+            --warning-color: #f59e0b; /* Light orange */
+            --danger-color: #ef4444; /* Light red */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background-color: #f8faff;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: linear-gradient(135deg, #7b68ee, #4a7bff);
+            padding: 15px 0;
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: white !important;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05) translateY(-2px);
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            margin: 0 5px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+            color: white !important;
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Main Content Styles */
+        .main-container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            padding: 35px;
+            margin: 40px 0;
+            animation: slideIn 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            border: 1px solid rgba(74, 123, 255, 0.08);
+        }
+
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+            position: relative;
+        }
+
+        .header-section::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            border-radius: 5px;
+        }
+
+        .header-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .btn-add-question {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(74, 123, 255, 0.15);
+        }
+
+        .btn-add-question:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(74, 123, 255, 0.2);
+            color: white;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background-color: #f9faff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+            border: 1px solid var(--border-color);
+        }
+
+        .input-group-text {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.01);
+            font-size: 0.95rem;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(74, 123, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .input-group .form-control {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .btn-filter {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn-filter:hover {
+            background-color: #3db9b0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.2);
+            color: white;
+        }
+
+        /* Questions Table */
+        .questions-section {
+            margin-top: 20px;
+        }
+
+        .question-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02);
+        }
+
+        .question-table th {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-weight: 600;
+            text-align: left;
+            padding: 16px 15px;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .question-table td {
+            padding: 16px 15px;
+            color: var(--dark-text);
+            font-size: 0.95rem;
+            vertical-align: middle;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .question-table tbody tr {
+            background-color: white;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            position: relative;
+        }
+
+        .question-table tbody tr:hover {
+            background-color: rgba(74, 123, 255, 0.03);
+            transform: translateY(-3px) scale(1.005);
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .btn-view, .btn-edit, .btn-delete {
+            padding: 8px;
+            border-radius: 8px;
+            border: none;
+            color: white;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            font-size: 0.9rem;
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-view {
+            background-color: var(--primary-color);
+        }
+
+        .btn-edit {
+            background-color: var(--warning-color);
+        }
+
+        .btn-delete {
+            background-color: var(--danger-color);
+        }
+
+        .btn-view:hover, .btn-edit:hover, .btn-delete:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.07);
+            color: white;
+        }
+
+        /* Pagination */
+        .pagination-wrapper {
+            margin-top: 40px;
+        }
+
+        .pagination .page-link {
+            color: var(--primary-color);
+            border: none;
+            padding: 10px 16px;
+            margin: 0 5px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 5px 15px rgba(74, 123, 255, 0.2);
+        }
+
+        .pagination .page-item:not(.active) .page-link:hover {
+            background-color: rgba(74, 123, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Modal Styles */
+        .modal-content {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            border: none;
+            padding: 20px 30px;
+        }
+
+        .modal-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-footer {
+            border: none;
+            padding: 20px 30px 30px;
+        }
+
+        .modal-footer .btn {
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .btn-secondary {
+            background-color: #f1f5f9;
+            color: var(--dark-text);
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e2e8f0;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            box-shadow: 0 8px 15px rgba(74, 123, 255, 0.15);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(74, 123, 255, 0.2);
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            border: none;
+            color: white;
+            box-shadow: 0 8px 15px rgba(239, 68, 68, 0.15);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(239, 68, 68, 0.2);
+            background-color: #e03131;
+        }
+
+        /* Add Question Form */
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-text);
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .answer-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            background-color: #f9faff;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .answer-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+        }
+
+        .answer-option .form-check-input {
+            width: 20px;
+            height: 20px;
+        }
+
+        .answer-option .form-control {
+            flex-grow: 1;
+        }
+
+        /* View Question Modal */
+        .question-details {
+            padding: 10px;
+        }
+
+        .question-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+
+        .question-content {
+            font-size: 1.1rem;
+            color: var(--dark-text);
+            font-weight: 500;
+            line-height: 1.6;
+            padding: 20px;
+            background-color: #f9faff;
+            border-radius: 10px;
+        }
+
+        .answer-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .explanation-section {
+            background-color: #f9faff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .explanation-section h6 {
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 10px;
+        }
+
+        .explanation-section p {
+            margin: 0;
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        .meta-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: rgba(74, 123, 255, 0.95);
+                padding: 20px;
+                border-radius: 15px;
+                margin-top: 15px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+            }
+
+            .main-container {
+                padding: 25px;
+                margin: 20px 0;
+            }
+
+            .header-section {
+                flex-direction: column;
+                gap: 20px;
+                align-items: flex-start;
+            }
+
+            .btn-add-question {
+                width: 100%;
+                justify-content: center;
+            }
+
+        }
+
+        @media (max-width: 767px) {
+            .question-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .action-buttons {
+                flex-direction: row;
+            }
+
+            .btn-view, .btn-edit, .btn-delete {
+                width: 32px;
+                height: 32px;
+                font-size: 0.8rem;
+            }
+
+            .modal-dialog {
+                margin: 10px;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+        }
+    </style>
+    <title>Ngân Hàng Câu Hỏi - Cổng Thi Trực Tuyến</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-book-open me-2"></i>Cổng Thi Trực Tuyến
+        </a>
+        <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/"><i class="fas fa-home me-1"></i> Trang Chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/exam"><i class="fas fa-file-alt me-1"></i> Đề Thi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/question"><i class="fas fa-question-circle me-1"></i> Câu Hỏi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/examResult"><i class="fas fa-chart-bar me-1"></i> Kết Quả</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile"><i class="fas fa-user me-1"></i> Hồ Sơ</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="main-container">
+        <div class="header-section">
+            <h2><i class="fas fa-question-circle me-2"></i>Ngân Hàng Câu Hỏi</h2>
+            <button class="btn btn-add-question" data-bs-target="#addQuestionModal" data-bs-toggle="modal">
+                <i class="fas fa-plus me-2"></i>Thêm câu hỏi
+            </button>
+        </div>
+
+        <div class="filter-section">
+            <div class="row g-3">
+                <div class="col-lg-3 col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <label>
+                            <input class="form-control" placeholder="Tìm kiếm theo nội dung..." type="text">
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <label>
+                        <select class="form-select">
+                            <option selected>Chọn môn học</option>
+                            <option>Toán học</option>
+                            <option>Tiếng Anh</option>
+                            <option>Vật lý</option>
+                            <option>Hóa học</option>
+                            <option>Sinh học</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <label>
+                        <select class="form-select">
+                            <option selected>Loại câu hỏi</option>
+                            <option>Trắc nghiệm một lựa chọn</option>
+                            <option>Trắc nghiệm nhiều lựa chọn</option>
+                            <option>Đúng/Sai</option>
+                            <option>Tự luận</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <label>
+                        <select class="form-select">
+                            <option selected>Mức độ</option>
+                            <option>Dễ</option>
+                            <option>Trung bình</option>
+                            <option>Khó</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-filter">
+                        <i class="fas fa-filter me-2"></i>Lọc
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="questions-section">
+            <div class="table-responsive">
+                <table class="question-table">
+                    <thead>
+                    <tr>
+                        <th style="width: 5%;">ID</th>
+                        <th style="width: 10%;">Hình ảnh</th>
+                        <th style="width: 30%;">Nội dung câu hỏi</th>
+                        <th style="width: 15%;">Môn học</th>
+                        <th style="width: 15%;">Loại câu hỏi</th>
+                        <th style="width: 10%;">Mức độ</th>
+                        <th style="width: 15%;">Thao tác</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <img alt="Question image" class="question-image" src="/images/question-img1.jpg">
+                        </td>
+                        <td class="text-start">Tìm giá trị của x trong phương trình: 2x + 5 = 15</td>
+                        <td>Toán học</td>
+                        <td>Trắc nghiệm</td>
+                        <td><span class="badge bg-success">Dễ</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-view" title="Xem chi tiết"><i class="fas fa-eye"></i></button>
+                                <button class="btn-edit" title="Chỉnh sửa"><i class="fas fa-edit"></i></button>
+                                <button class="btn-delete" title="Xóa"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <img alt="Question image" class="question-image" src="/images/question-img2.jpg">
+                        </td>
+                        <td class="text-start">Which of the following sentences is grammatically correct?</td>
+                        <td>Tiếng Anh</td>
+                        <td>Trắc nghiệm</td>
+                        <td><span class="badge bg-warning text-dark">Trung bình</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-view" title="Xem chi tiết"><i class="fas fa-eye"></i></button>
+                                <button class="btn-edit" title="Chỉnh sửa"><i class="fas fa-edit"></i></button>
+                                <button class="btn-delete" title="Xóa"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <img alt="Question image" class="question-image" src="/images/question-img3.jpg">
+                        </td>
+                        <td class="text-start">Phân tích các yếu tố ảnh hưởng đến quá trình quang hợp của thực vật?</td>
+                        <td>Sinh học</td>
+                        <td>Tự luận</td>
+                        <td><span class="badge bg-danger">Khó</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-view" title="Xem chi tiết"><i class="fas fa-eye"></i></button>
+                                <button class="btn-edit" title="Chỉnh sửa"><i class="fas fa-edit"></i></button>
+                                <button class="btn-delete" title="Xóa"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <img alt="Question image" class="question-image" src="/images/question-img4.jpg">
+                        </td>
+                        <td class="text-start">Nước sôi ở 100°C ở điều kiện áp suất tiêu chuẩn.</td>
+                        <td>Vật lý</td>
+                        <td>Đúng/Sai</td>
+                        <td><span class="badge bg-success">Dễ</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-view" title="Xem chi tiết"><i class="fas fa-eye"></i></button>
+                                <button class="btn-edit" title="Chỉnh sửa"><i class="fas fa-edit"></i></button>
+                                <button class="btn-delete" title="Xóa"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <img alt="Question image" class="question-image" src="/images/question-img5.jpg">
+                        </td>
+                        <td class="text-start">Phản ứng nào sau đây là phản ứng oxi hóa khử?</td>
+                        <td>Hóa học</td>
+                        <td>Trắc nghiệm</td>
+                        <td><span class="badge bg-warning text-dark">Trung bình</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-view" title="Xem chi tiết"><i class="fas fa-eye"></i></button>
+                                <button class="btn-edit" title="Chỉnh sửa"><i class="fas fa-edit"></i></button>
+                                <button class="btn-delete" title="Xóa"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <nav aria-label="Page navigation" class="pagination-wrapper">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-left"></i></a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#"><i class="fas fa-angle-right"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Thêm Câu Hỏi -->
+<div aria-hidden="true" aria-labelledby="addQuestionModalLabel" class="modal fade" id="addQuestionModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addQuestionModalLabel">
+                    <i class="fas fa-plus-circle me-2"></i>Thêm câu hỏi mới
+                </h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <form id="questionForm">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label" for="subject">Môn học</label>
+                            <select class="form-select" id="subject" required>
+                                <option disabled selected value="">Chọn môn học</option>
+                                <option>Toán học</option>
+                                <option>Tiếng Anh</option>
+                                <option>Vật lý</option>
+                                <option>Hóa học</option>
+                                <option>Sinh học</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="questionType">Loại câu hỏi</label>
+                            <select class="form-select" id="questionType" required>
+                                <option disabled selected value="">Chọn loại câu hỏi</option>
+                                <option value="multiple-choice">Trắc nghiệm một lựa chọn</option>
+                                <option value="multiple-answer">Trắc nghiệm nhiều lựa chọn</option>
+                                <option value="true-false">Đúng/Sai</option>
+                                <option value="essay">Tự luận</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="questionContent">Nội dung câu hỏi</label>
+                        <textarea class="form-control" id="questionContent" required rows="4"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="questionImage">Hình ảnh minh họa</label>
+                        <input class="form-control" id="questionImage" type="file">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="difficultyLevel">Mức độ</label>
+                        <select class="form-select" id="difficultyLevel" required>
+                            <option disabled selected value="">Chọn mức độ</option>
+                            <option value="easy">Dễ</option>
+                            <option value="medium">Trung bình</option>
+                            <option value="hard">Khó</option>
+                        </select>
+                    </div>
+
+                    <!-- Phần động cho câu trả lời -->
+                    <div class="mt-4" id="answersSection">
+                        <h6 class="mb-3">Các phương án trả lời</h6>
+                        <div id="multipleChoiceAnswers" style="display: none;">
+                            <div class="answer-option mb-3">
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <label>
+                                            <input class="form-check-input" name="correctAnswer" type="radio">
+                                        </label>
+                                    </div>
+                                    <label>
+                                        <input class="form-control" placeholder="Phương án A" type="text">
+                                    </label>
+                                    <button class="btn btn-outline-danger" type="button"><i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="answer-option mb-3">
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <label>
+                                            <input class="form-check-input" name="correctAnswer" type="radio">
+                                        </label>
+                                    </div>
+                                    <label>
+                                        <input class="form-control" placeholder="Phương án B" type="text">
+                                    </label>
+                                    <button class="btn btn-outline-danger" type="button"><i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm" id="addOptionBtn" type="button">
+                                <i class="fas fa-plus me-1"></i>Thêm phương án
+                            </button>
+                        </div>
+
+                        <div id="multipleAnswersOptions" style="display: none;">
+                            <div class="answer-option mb-3">
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <label>
+                                            <input class="form-check-input" name="correctAnswers" type="checkbox">
+                                        </label>
+                                    </div>
+                                    <label>
+                                        <input class="form-control" placeholder="Phương án A" type="text">
+                                    </label>
+                                    <button class="btn btn-outline-danger" type="button"><i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="answer-option mb-3">
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <label>
+                                            <input class="form-check-input" name="correctAnswers" type="checkbox">
+                                        </label>
+                                    </div>
+                                    <label>
+                                        <input class="form-control" placeholder="Phương án B" type="text">
+                                    </label>
+                                    <button class="btn btn-outline-danger" type="button"><i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm" id="addMultipleOptionBtn" type="button">
+                                <i class="fas fa-plus me-1"></i>Thêm phương án
+                            </button>
+                        </div>
+
+                        <div id="trueFalseOptions" style="display: none;">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" id="trueOption" name="trueFalseAnswer" type="radio"
+                                       value="true">
+                                <label class="form-check-label" for="trueOption">Đúng</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" id="falseOption" name="trueFalseAnswer" type="radio"
+                                       value="false">
+                                <label class="form-check-label" for="falseOption">Sai</label>
+                            </div>
+                        </div>
+
+                        <div id="essayAnswer" style="display: none;">
+                            <div class="mb-3">
+                                <label class="form-label" for="modelAnswer">Gợi ý đáp án</label>
+                                <textarea class="form-control" id="modelAnswer" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="explanation">Giải thích đáp án</label>
+                        <textarea class="form-control" id="explanation" rows="2"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="tags">Thẻ gắn (phân loại, từ khóa)</label>
+                        <input class="form-control" id="tags" placeholder="Nhập các thẻ, cách nhau bằng dấu phẩy"
+                               type="text">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Hủy</button>
+                <button class="btn btn-primary" id="saveQuestionBtn" type="button">
+                    <i class="fas fa-save me-2"></i>Lưu câu hỏi
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Xem Chi Tiết -->
+<div aria-hidden="true" aria-labelledby="viewQuestionModalLabel" class="modal fade" id="viewQuestionModal"
+     tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewQuestionModalLabel">
+                    <i class="fas fa-question-circle me-2"></i>Chi tiết câu hỏi
+                </h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <div class="question-details">
+                    <div class="question-header">
+                        <div class="question-badges mb-3">
+                            <span class="badge bg-primary">Toán học</span>
+                            <span class="badge bg-secondary">Trắc nghiệm</span>
+                            <span class="badge bg-success">Dễ</span>
+                        </div>
+                        <div class="question-content mb-4">
+                            <h5>Tìm giá trị của x trong phương trình: 2x + 5 = 15</h5>
+                            <div class="question-image-container mt-3">
+                                <img alt="Question image" class="img-fluid rounded" src="/images/question-img1.jpg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-answers mb-4">
+                        <h6 class="mb-3">Phương án trả lời:</h6>
+                        <div class="answer-list">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" disabled id="viewAnswer1" name="viewAnswerOptions"
+                                       type="radio">
+                                <label class="form-check-label" for="viewAnswer1">A. x = 3</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input checked class="form-check-input" disabled id="viewAnswer2"
+                                       name="viewAnswerOptions" type="radio">
+                                <label class="form-check-label" for="viewAnswer2">B. x = 5</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" disabled id="viewAnswer3" name="viewAnswerOptions"
+                                       type="radio">
+                                <label class="form-check-label" for="viewAnswer3">C. x = 7</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" disabled id="viewAnswer4" name="viewAnswerOptions"
+                                       type="radio">
+                                <label class="form-check-label" for="viewAnswer4">D. x = 10</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="explanation-section p-3 mb-3 bg-light rounded">
+                        <h6><i class="fas fa-lightbulb me-2"></i>Giải thích:</h6>
+                        <p>2x + 5 = 15<br>
+                            2x = 15 - 5<br>
+                            2x = 10<br>
+                            x = 5</p>
+                    </div>
+
+                    <div class="meta-section">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Thẻ:</strong> <span class="tags">đại số, phương trình, cơ bản</span></p>
+                            </div>
+                            <div class="col-md-6 text-md-end">
+                                <p><strong>ID:</strong> #1 | <strong>Tạo ngày:</strong> 15/05/2023</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Đóng</button>
+                <button class="btn btn-primary" data-bs-dismiss="modal" data-bs-target="#addQuestionModal"
+                        data-bs-toggle="modal"
+                        type="button">
+                    <i class="fas fa-edit me-2"></i>Chỉnh sửa
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Xác nhận xóa -->
+<div aria-hidden="true" aria-labelledby="deleteConfirmModalLabel" class="modal fade" id="deleteConfirmModal"
+     tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmModalLabel">
+                    <i class="fas fa-exclamation-triangle text-danger me-2"></i>Xác nhận xóa
+                </h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa câu hỏi này không? Hành động này không thể hoàn tác.</p>
+                <p class="mb-0"><strong>Câu hỏi:</strong> <span id="deleteQuestionTitle">Tìm giá trị của x trong phương trình: 2x + 5 = 15</span>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Hủy</button>
+                <button class="btn btn-danger" id="confirmDeleteBtn" type="button">
+                    <i class="fas fa-trash-alt me-2"></i>Xác nhận xóa
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Change answer section based on question type
+    document.getElementById('questionType').addEventListener('change', function () {
+        const type = this.value;
+        document.getElementById('multipleChoiceAnswers').style.display = 'none';
+        document.getElementById('multipleAnswersOptions').style.display = 'none';
+        document.getElementById('trueFalseOptions').style.display = 'none';
+        document.getElementById('essayAnswer').style.display = 'none';
+
+        if (type === 'multiple-choice') {
+            document.getElementById('multipleChoiceAnswers').style.display = 'block';
+        } else if (type === 'multiple-answer') {
+            document.getElementById('multipleAnswersOptions').style.display = 'block';
+        } else if (type === 'true-false') {
+            document.getElementById('trueFalseOptions').style.display = 'block';
+        } else if (type === 'essay') {
+            document.getElementById('essayAnswer').style.display = 'block';
+        }
+    });
+
+    // Add event listeners to view buttons
+    document.querySelectorAll('.btn-view').forEach(button => {
+        button.addEventListener('click', function () {
+            const modal = new bootstrap.Modal(document.getElementById('viewQuestionModal'));
+            modal.show();
+        });
+    });
+
+    // Add event listeners to delete buttons
+    document.querySelectorAll('.btn-delete').forEach(button => {
+        button.addEventListener('click', function () {
+            const modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+            modal.show();
+        });
+    });
+
+    // Confirm delete action
+    document.getElementById('confirmDeleteBtn').addEventListener('click', function () {
+        // Here you would handle the actual delete operation
+        alert('Câu hỏi đã được xóa thành công!');
+        const modal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
+        modal.hide();
+    });
+</script>
+</body>
+</html>

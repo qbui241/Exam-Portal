@@ -1,0 +1,38 @@
+:root {
+  --primary: #fe2c55;
+  --black: #000;
+  --text-color: #333;
+  --primary-color: #04AA6D;
+
+  --default-layout-height: 60px;
+  --default-layout-width: 1150px;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
+  font-size: 1.6rem;
+  text-rendering: optimizeSpeed;
+  color: var(--text-color);
+}
+
+a {
+  text-decoration: none
+}
+
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+@import "normalize.css";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+

@@ -1,0 +1,133 @@
+<!-- do-test-autogen.component.html -->
+<div class="exam-container">
+  <!-- Exam overview panel (hidden by default) -->
+  <div class="exam-overview" [class.visible]="isExamOverviewVisible">
+    <div class="exam-overview-header">
+      <h3>{{ localExamData?.name }}</h3>
+      <button class="close-button" (click)="toggleExamOverview()">
+        <i class="fa fa-times"></i> Đóng
+      </button>
+    </div>
+    <div class="exam-overview-content">
+      <div class="exam-info">
+        <p><strong>Tên đề thi:</strong> {{ localExamData?.name }}</p>
+        <p><strong>Loại đề thi:</strong> {{ localExamData?.type }}</p>
+        <p><strong>Thời gian:</strong> {{ localExamData?.duration }} phút</p>
+        <p><strong>Số câu hỏi:</strong> {{ localExamData?.totalQuestions }}</p>
+      </div>
+      <div class="exam-instructions">
+        <h4>Hướng dẫn làm bài</h4>
+        <ul>
+          <li>Mỗi câu hỏi chỉ có một đáp án đúng</li>
+          <li>Bạn có thể thay đổi đáp án trong thời gian làm bài</li>
+          <li>Bấm vào số thứ tự ở bảng bên phải để di chuyển đến câu hỏi</li>
+          <li>Thời gian còn lại được hiển thị ở góc trên bên phải</li>
+          <li>Khi hết thời gian, bài thi sẽ tự động được nộp</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Left panel: Question list -->
+  <div class="questions-panel">
+    <div class="panel-header">
+      <h2>{{ localExamData?.name }}</h2>
+      <button class="info-button" (click)="toggleExamOverview()">
+        <i class="fa fa-info-circle"></i> Xem đề thi
+      </button>
+    </div>
+
+    <div class="questions-list">
+      <div *ngFor="let question of examData?.questions; let i = index"
+           class="question-item"
+           id="question-item-{{i}}">
+
+        <div class="question-header">
+          <div class="question-number">Câu {{i + 1}}</div>
+          <div class="question-text">{{question.question_text}}</div>
+        </div>
+
+        <div class="answers-list">
+          <div *ngFor="let answer of question.question_answers"
+               class="answer-item"
+               [class.selected]="isAnswerSelected(question.question_id, answer.answer_id)"
+               (click)="selectAnswer(question.question_id, answer.answer_id)">
+
+            <div class="answer-indicator">
+              <div class="answer-circle" [class.selected]="isAnswerSelected(question.question_id, answer.answer_id)"></div>
+            </div>
+
+            <div class="answer-text">{{answer.answer_text}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right panel: Timer and tracking -->
+  <div class="control-panel">
+    <div class="timer-section">
+      <div class="timer-label">Thời gian còn lại</div>
+      <div class="timer-display" [class.warning]="remainingTimeInSeconds <= 300">{{formatTime()}}</div>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-header">
+        <span>Tiến độ làm bài</span>
+        <span class="progress-count">{{getAnsweredCount()}}/{{examData?.questions?.length}}</span>
+      </div>
+
+      <div class="progress-bar-container">
+        <div class="progress-bar" [style.width.%]="getCompletedPercentage()"></div>
+      </div>
+
+      <div class="answers-tracking">
+        <h4>Bảng theo dõi câu trả lời</h4>
+
+        <div class="answers-grid">
+          <div *ngFor="let answer of studentAnswers; let i = index"
+               class="answer-card"
+               [class.answered]="answer.selected_answer_id !== null"
+               [class.unanswered]="answer.selected_answer_id === null"
+               (click)="scrollToQuestion(i)">
+
+            <div class="answer-card-inner">
+              <div class="question-header">
+                {{i + 1}}
+              </div>
+              <div class="answer-content">
+                {{answer.selected_answer_id !== null ?
+                getLetterFromAnswer(answer.question_id, answer.selected_answer_id) : '?'}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="submit-section">
+      <div class="submit-info" *ngIf="!examSubmitted">
+        <div class="submit-stats">
+          <div class="stat-item">
+            <div class="stat-label">Đã làm</div>
+            <div class="stat-value">{{getAnsweredCount()}}</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Chưa làm</div>
+            <div class="stat-value">{{getUnansweredCount()}}</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Tổng số</div>
+            <div class="stat-value">{{examData?.questions?.length}}</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="submit-button"
+              [disabled]="examSubmitted"
+              (click)="confirmSubmit()">
+        <i class="fa fa-check-circle"></i> {{examSubmitted ? 'Đã nộp bài' : 'Nộp bài'}}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="welcome-container">
+  <!-- Floating particles -->
+  <div class="particles">
+    <div class="particle" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]"></div>
+  </div>
+
+  <!-- Logo with LED effect -->
+  <div class="logo-container">
+    <span class="logo-text led-effect">
+      Online Exam Portal
+    </span>
+  </div>
+
+  <!-- Main content with glassmorphism effect -->
+  <div class="welcome-content">
+    <div class="glass-card">
+      <div class="card-content">
+        <!-- Left side with title and description -->
+        <div class="info-section">
+          <h2 class="welcome-title">Chào mừng đến với <br> <span class="highlight">Online Exam Portal</span></h2>
+          <p class="welcome-description">Nền tảng học tập và kiểm tra trực tuyến hiện đại, giúp việc học tập trở nên hiệu quả hơn.</p>
+        </div>
+
+        <!-- Right side with form -->
+        <div class="form-section">
+          <div class="role-selector">
+            <label for="role">Chọn vai trò của bạn</label>
+            <div class="custom-select">
+              <select [(ngModel)]="selectedRole" id="role">
+                <option>Tôi là học sinh</option>
+                <option>Tôi là giáo viên</option>
+              </select>
+              <div class="select-arrow">▼</div>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button (click)="onContinue()" class="continue-btn">
+              <span class="btn-text">Tiếp tục</span>
+              <span class="btn-icon">
+              </span>
+            </button>
+            <button (click)="onRegister()" class="register-btn">
+              <span class="btn-text">Đăng ký</span>
+              <span class="btn-icon">
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

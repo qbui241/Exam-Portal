@@ -1,0 +1,26 @@
+$primary-color: #8ed8ff; // Màu xanh lá
+$text-color: #76a6ff;
+
+.nav {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+
+  .nav-item {
+    text-decoration: none;
+    color: $text-color;
+    font-size: 1.6rem;
+    font-weight: 500;
+    transition: color 0.3s;
+
+    &:hover {
+      color: $primary-color;
+    }
+
+    &.active {
+      color: $primary-color;
+      font-weight: bold;
+      border-bottom: 2px solid $primary-color;
+    }
+  }
+}

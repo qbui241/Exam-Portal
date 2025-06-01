@@ -1,0 +1,24 @@
+.find-button {
+  padding: 10px 40px;
+
+  button {
+    background-color: #0CAF60; // Màu xanh lá tương tự
+    color: white; // Chữ màu trắng
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px; // Bo góc giống hình
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 200px;
+    height: 55px;
+
+    &:hover {
+      background-color: #0A944F; // Màu tối hơn khi hover
+    }
+
+    &:active {
+      background-color: #087F42; // Màu đậm hơn khi click
+    }
+  }
+}

@@ -1,0 +1,53 @@
+<div class="container">
+  <header class="header">
+    <div class="wrapper-logo">
+      <div class="logo">Online Exam Portal</div>
+      <nav class="breadcrumb">
+        <span>►</span>
+        <span>Đề thi: {{ exam_name }}</span>
+      </nav>
+    </div>
+    <div class="return-button">
+      <button (click)="goBack()">
+        <i class="fa fa-arrow-left"></i> Quay lại
+      </button>
+    </div>
+  </header>
+</div>
+
+<div class="content-wrapper">
+  <div class="question-list-container">
+    <div *ngIf="questions.length === 0" class="no-questions">
+      <p>Chưa có câu hỏi nào. Hãy thêm câu hỏi để bắt đầu!</p>
+    </div>
+
+    <div class="question-list">
+      <div
+        class="question-card"
+        *ngFor="let question of questions; let i = index"
+      >
+        <div class="question-header">
+          <div class="question-number">Câu {{ i + 1 }}</div>
+        </div>
+
+        <div class="question-content">
+          <div class="question-label">Nội dung:</div>
+          <p class="question-text">{{ question.content }}</p>
+        </div>
+
+        <div class="answers-container">
+          <div
+            class="answer-item"
+            *ngFor="let answer of answers[i]; let j = index"
+            [ngClass]="{ 'correct-answer': j === 0 }"
+          >
+            <div class="answer-content">
+              <p class="answer-text">{{ answer.answerText }}</p>
+              <span *ngIf="j === 0" class="correct-badge">Đáp án đúng</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

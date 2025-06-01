@@ -1,0 +1,78 @@
+<div class="exam-container">
+  <!-- Header with search and create button -->
+  <div class="exam-header">
+    <div class="search-wrapper">
+      <div class="search-input">
+        <i class="fa fa-search"></i>
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          (input)="filterExam()"
+          placeholder="Tìm kiếm theo tên đề thi..."
+        />
+      </div>
+      <button class="create-button" (click)="navigateToCreateExam()">
+        <i class="fa fa-plus"></i>
+        <span>Tạo đề thi mới</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Exam Cards Grid -->
+  <div class="exam-grid">
+    <div
+      class="exam-card"
+      *ngFor="let exam of filteredExams"
+      (click)="editExam(exam.id, exam.name, exam_session_id, exam.type)"
+    >
+      <div class="exam-card-header">
+        <h3 class="exam-name">{{ exam.name }}</h3>
+        <span class="exam-type">{{ exam.type }}</span>
+      </div>
+      <p class="exam-description">{{ exam.description }}</p>
+      <div class="exam-details">
+        <div class="detail-item">
+          <i class="fa fa-clock-o"></i>
+          <span>{{ exam.duration }} phút</span>
+        </div>
+        <div class="detail-item">
+          <i class="fa fa-calendar"></i>
+          <span>{{ exam.createDate | date : "dd/MM/yyyy" }}</span>
+        </div>
+      </div>
+      <div class="exam-actions">
+        <button class="edit-btn">Chỉnh sửa</button>
+        <button class="delete-btn" (click)="confirmDelete($event, exam.id)">
+          Xóa
+        </button>
+      </div>
+    </div>
+
+    <!-- Empty state when no exams are found -->
+    <div class="empty-state" *ngIf="filteredExams.length === 0">
+      <i class="fa fa-search"></i>
+      <h3>Không tìm thấy đề thi</h3>
+      <p>Thử tìm kiếm với từ khóa khác hoặc tạo đề thi mới</p>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="delete-modal" *ngIf="showDeleteConfirmation">
+    <div class="delete-modal-content">
+      <div class="delete-modal-header">
+        <h3>Xác nhận xóa</h3>
+        <button class="close-button" (click)="cancelDelete()">×</button>
+      </div>
+      <div class="delete-modal-body">
+        <p>Bạn có chắc chắn muốn xóa đề thi này không?</p>
+        <p>Hành động này không thể hoàn tác sau khi thực hiện.</p>
+      </div>
+      <div class="delete-modal-footer">
+        <button class="cancel-btn" (click)="cancelDelete()">Hủy</button>
+        <button class="confirm-btn" (click)="proceedWithDelete()">
+          Xác nhận xóa
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

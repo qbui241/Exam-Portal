@@ -1,0 +1,45 @@
+.create-button {
+  padding: 10px 40px;
+
+  button {
+    background-color: #0CAF60;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 200px;
+    height: 55px;
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+      background-color: #0A944F;
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    &:active {
+      background-color: #087F42;
+      transform: scale(0.98);
+    }
+
+    // Hiệu ứng gradient động
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgb(255, 255, 255), transparent);
+      transition: left 0.6s ease;
+    }
+
+    &:hover::before {
+      left: 100%;
+    }
+  }
+}

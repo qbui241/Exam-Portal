@@ -1,0 +1,49 @@
+<app-header-student></app-header-student>
+
+<!-- Search input for table filtering -->
+<div class="search-container">
+  <input (input)="filterExams()"
+         [(ngModel)]="searchTerm"
+         placeholder="Nhập mã, tên, hoặc mô tả kỳ thi..."
+         type="text"/>
+  <button (click)="openModal()" class="search-btn">Tham gia kỳ thi với mã</button>
+</div>
+
+<!-- Modal for searching exam-session code -->
+<div *ngIf="isModalOpen" class="modal-overlay">
+  <div class="modal">
+    <h2>Nhập mã kỳ thi</h2>
+    <input [(ngModel)]="searchCode" placeholder="Nhập mã kỳ thi..." type="text"/>
+    <p>{{ this.message }}</p>
+    <div class="modal-buttons">
+      <button (click)="searchByCode()">Tìm kiếm</button>
+      <button (click)="closeModal()">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<!-- Exam table -->
+<div class="exam-table">
+  <table>
+    <thead>
+    <tr>
+      <th>Tên kỳ thi</th>
+      <th>Ngày bắt đầu</th>
+      <th>Ngày kết thúc</th>
+      <th>Trạng thái</th>  <!-- Cột trạng thái -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr (click)="goToExamDetail(examSession)" *ngFor="let examSession of filteredExams" style="cursor: pointer;">
+      <td>
+        <p class="exam-name">{{ examSession.name }} - {{ examSession.description }}</p>
+        <p class="class-code">Mã kỳ thi: {{ examSession.code }}</p>
+      </td>
+      <td>{{ examSession.startDate }}</td>
+      <td>{{ examSession.endDate }}</td>
+      <td>{{ getStatus(examSession.startDate, examSession.endDate) }}</td>  <!-- Hiển thị trạng thái -->
+    </tr>
+    </tbody>
+  </table>
+</div>
+

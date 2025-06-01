@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a7bff; /* Sáng hơn so với màu cũ */
+            --secondary-color: #3a4f7a; /* Sáng hơn so với #1a1f36 */
+            --accent-color: #6db5ff; /* Sáng hơn */
+            --light-bg: #ffffff; /* Trắng sáng hơn */
+            --dark-text: #3a4b66; /* Sáng hơn nhưng vẫn đảm bảo độ tương phản */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background-color: var(--light-bg);
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: linear-gradient(135deg, #4a7bff, #6db5ff);
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: white !important;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            margin: 0 5px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: white !important;
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(58, 79, 122, 0.7), rgba(74, 123, 255, 0.7)),
+            url('https://images.unsplash.com/photo-1517842645767-c639042777db?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center;
+            background-size: cover;
+            padding: 150px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            animation: fadeInUp 1s ease;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            animation: fadeInUp 1s ease 0.3s;
+            animation-fill-mode: both;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-btn {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 30px;
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s;
+            animation-fill-mode: both;
+        }
+
+        .hero-btn:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 80px 0;
+            background-color: #f8faff;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background: var(--primary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: #6c7a94;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            border-radius: 15px;
+            border: none;
+            overflow: hidden;
+            margin-bottom: 30px;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+            height: 100%;
+            background-color: white;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.07);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .card-title {
+            font-weight: 600;
+            font-size: 1.4rem;
+            color: var(--dark-text);
+            margin-bottom: 15px;
+        }
+
+        .card-text {
+            color: #6c7a94;
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+
+        .feature-btn {
+            padding: 8px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .feature-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .feature-btn:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background-color: #eef2ff;
+            padding: 80px 0;
+            color: var(--dark-text);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-text {
+            font-size: 1.2rem;
+            color: #3a4b66;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #4a7bff, #6db5ff);
+            padding: 50px 0 20px;
+            color: white;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 20px;
+        }
+
+        .footer-links h5 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: rgba(74, 123, 255, 0.95);
+                padding: 20px;
+                border-radius: 10px;
+                margin-top: 10px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+    <title>Cổng Thi Trực Tuyến</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-book-open me-2"></i>Cổng Thi Trực Tuyến
+        </a>
+        <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/"><i class="fas fa-home me-1"></i> Trang Chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/exam"><i class="fas fa-file-alt me-1"></i> Bài Thi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/examQuestion"><i class="fas fa-tasks me-1"></i> Câu Hỏi Đề Thi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/examResult"><i class="fas fa-poll me-1"></i> Kết Quả Thi</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                       id="navbarDropdown" role="button">
+                        <i class="fas fa-cog me-1"></i> Thêm
+                    </a>
+                    <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/examSessionEnrollment">Đăng Ký Phiên Thi</a></li>
+                        <li><a class="dropdown-item" href="/question">Ngân Hàng Câu Hỏi</a></li>
+                        <li><a class="dropdown-item" href="/questionAnswer">Đáp Án Câu Hỏi</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Chào Mừng Đến Với Cổng Thi Trực Tuyến</h1>
+            <p>Nền tảng mạnh mẽ được thiết kế để đơn giản hóa quy trình thi cử cho giáo viên và học sinh. Tạo, quản lý
+                và đánh giá bài thi dễ dàng.</p>
+            <a class="btn hero-btn" href="/exam">Bắt Đầu Ngay <i class="fas fa-arrow-right ms-2"></i></a>
+        </div>
+    </div>
+</section>
+
+<section class="features-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Tính Năng Nổi Bật</h2>
+            <p>Tất cả những gì bạn cần để quản lý quy trình đánh giá giáo dục một cách hiệu quả</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h5 class="card-title">Quản Lý Bài Thi</h5>
+                        <p class="card-text">Tạo, lập lịch và quản lý bài thi với các cài đặt và định dạng tùy
+                            chỉnh.</p>
+                        <a class="btn feature-btn" href="/exam">Xem Bài Thi <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h5 class="card-title">Câu Hỏi Đề Thi</h5>
+                        <p class="card-text">Quản lý các câu hỏi trong đề thi và cấu trúc bài thi một cách khoa học.</p>
+                        <a class="btn feature-btn" href="/examQuestion">Xem Chi Tiết <i
+                                class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-poll"></i>
+                        </div>
+                        <h5 class="card-title">Kết Quả Thi</h5>
+                        <p class="card-text">Xem và phân tích kết quả thi của học sinh với các biểu đồ trực quan.</p>
+                        <a class="btn feature-btn" href="/examResult">Xem Kết Quả <i
+                                class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h5 class="card-title">Đăng Ký Phiên Thi</h5>
+                        <p class="card-text">Quản lý việc đăng ký và tham gia các phiên thi của học sinh.</p>
+                        <a class="btn feature-btn" href="/examSessionEnrollment">Quản Lý Đăng Ký <i
+                                class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h5 class="card-title">Ngân Hàng Câu Hỏi</h5>
+                        <p class="card-text">Tạo ngân hàng câu hỏi với nhiều loại và mức độ khó khác nhau.</p>
+                        <a class="btn feature-btn" href="/question">Xem Câu Hỏi <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h5 class="card-title">Đáp Án Câu Hỏi</h5>
+                        <p class="card-text">Quản lý đáp án cho các câu hỏi và cấu hình tùy chọn chấm điểm.</p>
+                        <a class="btn feature-btn" href="/questionAnswer">Xem Đáp Án <i
+                                class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="stats-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-6">
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-text">Bài Thi Đã Tạo</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-item">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-text">Câu Hỏi</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-text">Môn Học</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-item">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-text">Sự Hài Lòng</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <span class="footer-logo"><i class="fas fa-book-open me-2"></i>Cổng Thi Trực Tuyến</span>
+                <p class="footer-text">Nền tảng toàn diện để tạo và quản lý các bài thi trực tuyến với phân tích và báo
+                    cáo nâng cao.</p>
+            </div>
+            <div class="col-md-2 col-6 mb-4">
+                <div class="footer-links">
+                    <h5>Tính Năng</h5>
+                    <ul>
+                        <li><a href="/exam">Bài Thi</a></li>
+                        <li><a href="/examQuestion">Câu Hỏi Đề Thi</a></li>
+                        <li><a href="/examResult">Kết Quả Thi</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2 col-6 mb-4">
+                <div class="footer-links">
+                    <h5>Tài Nguyên</h5>
+                    <ul>
+                        <li><a href="#">Tài Liệu Hướng Dẫn</a></li>
+                        <li><a href="#">Bài Hướng Dẫn</a></li>
+                        <li><a href="#">Câu Hỏi Thường Gặp</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="footer-links">
+                    <h5>Liên Hệ</h5>
+                    <ul>
+                        <li><a href="mailto:support@examportal.com"><i class="fas fa-envelope me-2"></i>
+                            hotro@congthi.com</a></li>
+                        <li><a href="tel:+1234567890"><i class="fas fa-phone me-2"></i> +84 123 456 789</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt me-2"></i> 123 Đường Giáo Dục, TP. Học Tập</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Cổng Thi Trực Tuyến. Đã đăng ký bản quyền.
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

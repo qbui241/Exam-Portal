@@ -1,0 +1,91 @@
+<div class="question-input-number">
+  <div class="container">
+    <div class="number-input-wrap">
+      <label for="question-number">Số câu</label>
+      <input
+        (change)="onQuestionNumberChange($event)"
+        [(ngModel)]="questionNumber"
+        class="number-input"
+        id="question-number"
+        type="number"
+      />
+      <button (click)="generateQuestions()" class="generate-button">
+        Tạo câu hỏi
+      </button>
+    </div>
+
+    <button (click)="handleSubmitAll()" class="generate-button">
+      Thêm câu hỏi
+    </button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="question-list-wrap">
+    <ul class="question-list">
+      <li *ngFor="let question of questions; let i = index" class="question">
+        <div class="question-name">
+          <p class="question-name-number">Câu {{ i + 1 }}:</p>
+          <input
+            (ngModelChange)="saveState()"
+            [(ngModel)]="questions[i].text"
+            class="question-name-input"
+            placeholder="Type something..."
+            type="text"
+            required
+          />
+          <span class="error" *ngIf="showError && !questions[i].text"
+            >* Nội dung câu hỏi không được để trống</span
+          >
+        </div>
+        <p class="correct-answer">Đáp án đúng</p>
+        <div class="input-wrap">
+          <input
+            (ngModelChange)="saveState()"
+            [(ngModel)]="questions[i].answers['1']"
+            class="answer-input correct"
+            placeholder="Nhập câu trả lời 1"
+            type="text"
+            required
+          />
+          <span class="error" *ngIf="showError && !questions[i].answers['1']"
+            >* Hãy nhập đáp án 1</span
+          >
+          <input
+            (ngModelChange)="saveState()"
+            [(ngModel)]="questions[i].answers['2']"
+            class="answer-input"
+            placeholder="Nhập câu trả lời 2"
+            type="text"
+            required
+          />
+          <span class="error" *ngIf="showError && !questions[i].answers['2']"
+            >* Hãy nhập đáp án 2</span
+          >
+          <input
+            (ngModelChange)="saveState()"
+            [(ngModel)]="questions[i].answers['3']"
+            class="answer-input"
+            placeholder="Nhập câu trả lời 3"
+            type="text"
+            required
+          />
+          <span class="error" *ngIf="showError && !questions[i].answers['3']"
+            >* Hãy nhập đáp án 3</span
+          >
+          <input
+            (ngModelChange)="saveState()"
+            [(ngModel)]="questions[i].answers['4']"
+            class="answer-input"
+            placeholder="Nhập câu trả lời 4"
+            type="text"
+            required
+          />
+          <span class="error" *ngIf="showError && !questions[i].answers['4']"
+            >* Hãy nhập đáp án 4</span
+          >
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

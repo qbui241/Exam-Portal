@@ -1,0 +1,96 @@
+<div class="exam-creation-page">
+  <!-- Animated background elements -->
+  <div class="animated-background">
+    <div class="floating-circle circle-1"></div>
+    <div class="floating-circle circle-2"></div>
+    <div class="floating-circle circle-3"></div>
+    <div class="floating-square square-1"></div>
+    <div class="floating-square square-2"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="page-header">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo-text">Online Exam Portal</div>
+        <nav class="breadcrumb-nav">
+          <div class="breadcrumb-item">
+            <span class="breadcrumb-arrow">
+              <i class="fa-solid fa-play"></i>
+            </span>
+            <span class="breadcrumb-text">Kỳ thi: {{ exam_session_name }}-{{ exam_session_description }}</span>
+          </div>
+          <div class="breadcrumb-item">
+            <span class="breadcrumb-arrow">
+              <i class="fa-solid fa-play"></i>
+            </span>
+            <span class="breadcrumb-text">Tạo đề mới</span>
+          </div>
+        </nav>
+      </div>
+      <button class="return-btn" (click)="goBack()">
+        <span class="btn-icon">
+          <i class="fa-solid fa-arrow-left"></i>
+        </span>
+        <span class="btn-text">Quay lại</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="creation-options">
+    <h2 class="section-title">Chọn phương thức tạo đề</h2>
+
+    <div class="options-container">
+      <div class="option-card auto-generate">
+        <div class="card-content">
+          <div class="card-icon-container">
+            <img
+              alt="Kho học liệu"
+              class="card-icon"
+              height="512"
+              ngSrc="/icon/autoGenerateExam.png"
+              width="512"
+            />
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Sử dụng kho học liệu</h3>
+            <p class="card-description">Sử dụng lại những câu hỏi biên soạn để sinh đề tự động</p>
+          </div>
+          <button class="action-btn primary-btn" (click)="navigateToAutoGenerate()">
+            <span class="btn-text">Chọn</span>
+            <span class="btn-icon">
+              <i class="fa-solid fa-arrow-right"></i>
+            </span>
+          </button>
+        </div>
+        <div class="card-decoration"></div>
+      </div>
+
+      <div class="option-card upload-file">
+        <div class="card-content">
+          <div class="card-icon-container">
+            <img
+              alt="Tải lên từ máy tính"
+              class="card-icon"
+              height="512"
+              ngSrc="/icon/UpLoadFileExam.png"
+              width="512"
+            />
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Tải lên từ máy tính</h3>
+            <p class="card-description">Tải đề bài lên từ máy tính và cấu hình bài tập mới</p>
+          </div>
+          <button class="action-btn primary-btn" (click)="navigateToECWF()">
+            <span class="btn-text">Bắt đầu</span>
+            <span class="btn-icon">
+              <i class="fa-solid fa-arrow-right"></i>
+            </span>
+          </button>
+        </div>
+        <div class="card-decoration"></div>
+      </div>
+    </div>
+  </main>
+</div>

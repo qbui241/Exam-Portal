@@ -1,0 +1,366 @@
+// Color variables
+    $primary-blue: #3f9bfa;
+    $primary-dark-blue: #7e7d7d;
+    $text-gray: #757575;
+    $bg-white: #ffffff;
+    $border-color: #e0e0e0;
+
+    .main-container {
+      background: linear-gradient(135deg, #f6f8fd 0%, #f1f4ff 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      transition: filter 0.3s ease, transform 0.3s ease;
+
+      // Blur effect when password form appears
+      &.blur {
+        filter: blur(6px);
+        transform: scale(0.98);
+        pointer-events: none;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 400px;
+        background: linear-gradient(180deg, rgba($primary-blue, 0.08) 0%, transparent 100%);
+        pointer-events: none;
+      }
+    }
+
+    // Centered search bar
+    .search-bar {
+      max-width: 800px;
+      margin: 100px auto 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+
+      input {
+        width: 60%;
+        height: 54px;
+        padding: 0 24px;
+        font-size: 1.5rem;
+        color: $primary-dark-blue;
+        background: $bg-white;
+        border: 2px solid $border-color;
+        border-radius: 15px;
+        transition: all 0.3s ease;
+        text-align: center;
+        box-shadow: 0 10px 25px -10px rgba($primary-blue, 0.1);
+
+        &:focus {
+          outline: none;
+          border-color: $primary-blue;
+          box-shadow:
+            0 0 0 4px rgba($primary-blue, 0.1),
+            0 12px 25px -8px rgba($primary-blue, 0.2);
+          transform: translateY(-2px);
+        }
+      }
+    }
+
+    .exam-detail__wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 30px;
+      backdrop-filter: blur(10px);
+      box-shadow:
+        0 20px 40px -15px rgba($primary-blue, 0.08),
+        0 0 0 1px rgba($primary-blue, 0.05),
+        inset 0 0 80px rgba($primary-blue, 0.03);
+      border: 1px solid rgba($primary-blue, 0.08);
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s ease;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg,
+          rgba($primary-blue, 0.05),
+          transparent 30%,
+          rgba($primary-blue, 0.03) 100%
+        );
+        border-radius: inherit;
+        z-index: -1;
+      }
+
+      table {
+        width: 100%;
+        border-spacing: 0;
+        border-radius: 20px;
+        background: rgba($bg-white, 0.95);
+        box-shadow:
+          0 15px 25px -5px rgba(0, 0, 0, 0.05),
+          0 0 0 1px rgba($primary-blue, 0.08);
+        overflow: hidden;
+
+        thead {
+          background: linear-gradient(
+            rgba($primary-blue, 0.15),
+            rgba($primary-blue, 0.05)
+          );
+
+          th {
+            padding: 24px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: $primary-dark-blue;
+            text-align: left;
+            border-bottom: 2px solid rgba($primary-blue, 0.15);
+            letter-spacing: 0.5px;
+          }
+        }
+
+        tbody {
+          tr {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+
+            td {
+              padding: 20px 24px;
+              border-bottom: 1px solid rgba($border-color, 0.15);
+              font-size: 1.5rem;
+              font-weight: 500;
+              color: $primary-dark-blue;
+              transition: all 0.3s ease;
+            }
+
+            &:hover {
+              background: linear-gradient(
+                120deg,
+                rgba($primary-blue, 0.08),
+                rgba($primary-blue, 0.02)
+              );
+              transform: scale(1.01);
+              box-shadow: 0 5px 15px -5px rgba($primary-blue, 0.1);
+
+              td {
+                color: $primary-blue;
+                transform: translateY(-4px);
+              }
+            }
+
+            &:last-child td {
+              border-bottom: none;
+            }
+          }
+        }
+      }
+    }
+
+    // Password form with moderate styling
+    .password-form {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(50, 65, 90, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 1000;
+      opacity: 0;
+      transition: all 0.4s ease;
+
+      &.visible {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 480px;
+        border-radius: 24px;
+        background: white;
+        overflow: hidden;
+        box-shadow:
+          0 25px 50px -15px rgba(0, 0, 0, 0.25),
+          0 0 0 1px rgba(255, 255, 255, 0.1);
+        transform: translateY(20px);
+        opacity: 0;
+        animation: passwordFormSlideIn 0.5s ease-out forwards;
+
+        .exam-info {
+          margin: 0;
+          padding: 30px 35px;
+          background: linear-gradient(135deg,
+            rgba($primary-blue, 0.15),
+            rgba($primary-blue, 0.05)
+          );
+          border-bottom: 1px solid rgba($border-color, 0.3);
+          text-align: center;
+
+          h2 {
+            color: #445A74;
+            font-size: 2.2rem;
+            margin-bottom: 18px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 15px;
+
+            &::after {
+              content: '';
+              position: absolute;
+              left: 50%;
+              transform: translateX(-50%);
+              bottom: 0;
+              width: 60px;
+              height: 3px;
+              background: $primary-blue;
+              border-radius: 3px;
+            }
+          }
+
+          .exam-details {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+
+            p {
+              color: $text-gray;
+              font-size: 1.5rem;
+              line-height: 1.4;
+
+              span {
+                color: #445A74;
+                font-weight: 600;
+                display: block;
+                margin-bottom: 4px;
+                font-size: 1.2rem;
+                letter-spacing: 0.6px;
+              }
+            }
+          }
+        }
+
+        h3 {
+          font-size: 1.7rem;
+          color: #445A74;
+          margin: 30px 0 28px;
+          text-align: center;
+          font-weight: 500;
+          padding: 0 25px;
+
+        }
+
+        .input-container {
+          display: flex;
+          gap: 12px;
+          justify-content: center;
+          margin: 0 auto 35px;
+
+          .input-box {
+            width: 52px;
+            height: 65px;
+            text-align: center;
+            font-size: 2.6rem;
+            font-weight: 500;
+            border: 2px solid rgba($border-color, 0.8);
+            border-radius: 14px;
+            background: white;
+            color: #445A74;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px -2px rgba(0, 0, 0, 0.1);
+
+            &:hover {  /* Add this hover state */
+              border-color: $primary-blue;
+              transform: translateY(-2px);
+              box-shadow: 0 4px 10px -2px rgba($primary-blue, 0.12);
+            }
+
+            &:focus {
+              outline: none;
+              border-color: $primary-blue;
+              box-shadow:
+                0 0 0 3px rgba($primary-blue, 0.15),
+                0 5px 12px -3px rgba($primary-blue, 0.15);
+              transform: translateY(-3px);
+            }
+          }
+        }
+
+        .error-message {
+          color: #e53935;
+          text-align: center;
+          font-size: 1.4rem;
+          margin-top: 5px;
+          margin-bottom: 15px;
+          height: 20px;
+          transition: all 0.3s ease;
+
+          &.visible {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    @keyframes passwordFormSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .search-bar {
+        margin: 80px 20px 20px;
+      }
+
+      .exam-detail__wrap {
+        padding: 20px;
+        margin: 0 20px;
+        border-radius: 20px;
+      }
+
+      .password-form .container {
+        width: 92%;
+      }
+
+      .password-form .container .exam-details {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .password-form .container .input-box {
+        width: 48px;
+        height: 60px;
+        font-size: 2.4rem;
+      }
+    }

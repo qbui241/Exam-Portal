@@ -1,0 +1,104 @@
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/fontawesome.min.css">
+        <link rel="stylesheet" href="../../../../assets/css/user-form.css">
+        <title>Thông tin cá nhân</title>
+      </head>
+      <body>
+      <div class="container">
+        <header>
+          <h1>Online Exam Portal</h1>
+          <svg (click)="Home()" class="svg-icon" height="35" viewBox="0 0 24 24" width="35" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"></path>
+          </svg>
+        </header>
+
+        <div class="content">
+          <!-- Phần avatar và thông tin người dùng -->
+          <div class="profile">
+            <img alt="mặt Tỏ" class="avatar" id="avatar-image"
+                 src="https://images.aeonmedia.co/images/acd6897d-9849-4188-92c6-79dabcbcd518/essay-final-gettyimages-685469924.jpg?width=3840&quality=75&format=auto">
+            <div class="profile-info">
+              <div class="profile-name">{{ UserInfo.user.fullName }}</div>
+              <!-- Input file ẩn -->
+              <input accept="image/*" id="avatar-upload" style="display: none;" type="file">
+              <!-- Nút thay đổi ảnh đại diện -->
+              <a class="change-profile-pic" href="#" id="change-avatar">Thay đổi ảnh đại diện</a>
+            </div>
+            <div id="role">
+              <h4>
+                <ng-content select="[role]"></ng-content>
+              </h4>
+            </div>
+
+          </div>
+
+          <!-- Phần thông tin cá nhân -->
+          <div class="personal-info-section">
+            <h2>Thông tin cá nhân</h2>
+            <form (ngSubmit)="saveInfo()" [formGroup]="personalInfoForm">
+              <div class="form-group">
+                <label for="fullname">Họ tên</label>
+                <input formControlName="name" id="fullname" placeholder="Họ tên" type="text">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="class">Lớp</label>
+                  <input formControlName="class" id="class" placeholder="Lớp" type="text">
+                </div>
+                <div class="form-group">
+                  <label for="school">Trường</label>
+                  <input formControlName="school" id="school" placeholder="Trường" type="text">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="dob">Ngày sinh</label>
+                  <input formControlName="dob" id="dob" placeholder="Ngày sinh" type="date">
+                </div>
+                <div class="form-group">
+                  <label for="province">Tỉnh</label>
+                  <input formControlName="province" id="province" placeholder="Tỉnh" type="text">
+                </div>
+              </div>
+              <button class="btn" type="submit">Lưu thông tin</button>
+            </form>
+
+          </div>
+
+          <div class="account-info-section">
+            <h2>Thông tin tài khoản</h2>
+            <div class="account-info">
+              <form (ngSubmit)="changePassword()" [formGroup]="accountForm">
+                <div class="form-group">
+                  <label for="phone-email">Số điện thoại hoặc email</label>
+                  <input formControlName="emailOrPhone" id="phone-email" placeholder="Số điện thoại hoặc email" type="text">
+                </div>
+
+                <!-- Phần đổi mật khẩu -->
+                <div class="change-password-section">
+                  <h4>Đổi mật khẩu</h4>
+                  <div class="form-group">
+                    <label for="current-password">Mật khẩu hiện tại</label>
+                    <input formControlName="currentPassword" id="current-password" placeholder="Mật khẩu hiện tại"
+                           type="password">
+                  </div>
+                  <div class="form-group">
+                    <label for="new-password">Mật khẩu mới</label>
+                    <input formControlName="newPassword" id="new-password" placeholder="Mật khẩu mới" type="password">
+                  </div>
+                  <div class="form-group">
+                    <label for="confirm-password">Xác nhận mật khẩu mới</label>
+                    <input formControlName="confirmPassword" id="confirm-password" placeholder="Xác nhận mật khẩu mới"
+                           type="password">
+                  </div>
+                  <button class="btn btn-change-password" type="submit">Đổi mật khẩu</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      </body>

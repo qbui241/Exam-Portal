@@ -1,0 +1,211 @@
+<header class="header">
+  <a routerLink="">Online Exam Portal</a>
+</header>
+
+<div class="container">
+  <div class="signup-form">
+    <h2>
+      <ng-content select="[signup_heading]"></ng-content>
+    </h2>
+    <a class="change-role" routerLink="">← Thay đổi vai trò</a>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="signupForm">
+      <div class="form-section">
+        <h3>Thông tin cá nhân</h3>
+
+        <!-- Họ tên -->
+        <div class="input-wrapper">
+          <input
+            formControlName="fullName"
+            placeholder="Họ tên"
+            required
+            type="text"
+          />
+          <div
+            *ngIf="
+              signupForm.get('fullName')?.touched &&
+              signupForm.get('fullName')?.errors
+            "
+          >
+            <small
+              *ngIf="signupForm.get('fullName')?.errors?.['required']"
+              class="error"
+              >Họ tên không được để trống.</small
+            >
+          </div>
+        </div>
+
+        <!-- Lớp và Trường -->
+        <div class="row">
+          <div class="input-wrapper">
+            <input
+              formControlName="class"
+              placeholder="Lớp"
+              required
+              type="text"
+            />
+            <div
+              *ngIf="
+                signupForm.get('class')?.touched &&
+                signupForm.get('class')?.errors
+              "
+            >
+              <small
+                *ngIf="signupForm.get('class')?.errors?.['required']"
+                class="error"
+                >Lớp không được để trống.</small
+              >
+            </div>
+          </div>
+
+          <div class="input-wrapper">
+            <input
+              formControlName="school"
+              placeholder="Trường"
+              required
+              type="text"
+            />
+            <div
+              *ngIf="
+                signupForm.get('school')?.touched &&
+                signupForm.get('school')?.errors
+              "
+            >
+              <small
+                *ngIf="signupForm.get('school')?.errors?.['required']"
+                class="error"
+                >Trường không được để trống.</small
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Ngày sinh và Tỉnh -->
+        <div class="row">
+          <div class="input-wrapper">
+            <input
+              formControlName="dob"
+              placeholder="Ngày sinh"
+              required
+              type="date"
+            />
+            <div
+              *ngIf="
+                signupForm.get('dob')?.touched && signupForm.get('dob')?.errors
+              "
+            >
+              <small
+                *ngIf="signupForm.get('dob')?.errors?.['required']"
+                class="error"
+                >Vui lòng chọn ngày sinh.</small
+              >
+            </div>
+          </div>
+
+          <div class="input-wrapper">
+            <select formControlName="province" required>
+              <option value="">Tỉnh</option>
+              <option value="HN">Hà Nội</option>
+              <option value="HCM">Hồ Chí Minh</option>
+              <option value="DN">Đà Nẵng</option>
+            </select>
+            <div
+              *ngIf="
+                signupForm.get('province')?.touched &&
+                signupForm.get('province')?.errors
+              "
+            >
+              <small
+                *ngIf="signupForm.get('province')?.errors?.['required']"
+                class="error"
+                >Vui lòng chọn tỉnh.</small
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Thông tin tài khoản</h3>
+
+        <!-- Email/Số điện thoại -->
+        <div class="input-wrapper">
+          <input
+            formControlName="contact"
+            placeholder="Số điện thoại hoặc email"
+            required
+            type="text"
+          />
+          <div
+            *ngIf="
+              signupForm.get('contact')?.touched &&
+              signupForm.get('contact')?.errors
+            "
+          >
+            <small
+              *ngIf="signupForm.get('contact')?.errors?.['required']"
+              class="error"
+              >Liên hệ không được để trống.</small
+            >
+            <small
+              *ngIf="signupForm.get('contact')?.errors?.['email']"
+              class="error"
+              >Định dạng email không hợp lệ.</small
+            >
+          </div>
+        </div>
+
+        <!-- Mật khẩu -->
+        <div class="input-wrapper">
+          <input
+            formControlName="password"
+            placeholder="Mật khẩu"
+            required
+            type="password"
+          />
+          <div
+            *ngIf="
+              signupForm.get('password')?.touched &&
+              signupForm.get('password')?.errors
+            "
+          >
+            <small
+              *ngIf="signupForm.get('password')?.errors?.['required']"
+              class="error"
+              >Mật khẩu không được để trống.</small
+            >
+            <small
+              *ngIf="signupForm.get('password')?.errors?.['minlength']"
+              class="error"
+              >Mật khẩu phải có ít nhất 6 ký tự.</small
+            >
+          </div>
+        </div>
+
+        <!-- Xác nhận mật khẩu -->
+        <div class="input-wrapper">
+          <input
+            formControlName="confirmPassword"
+            placeholder="Xác nhận mật khẩu"
+            required
+            type="password"
+          />
+          <div
+            *ngIf="signupForm.get('confirmPassword')?.touched && signupForm.errors?.['mismatch']"
+          >
+            <small class="error">Mật khẩu không khớp.</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nút đăng ký -->
+      <button [disabled]="signupForm.invalid" class="submit-btn" type="submit">
+        Đăng ký
+      </button>
+    </form>
+
+    <p class="login-link">
+      Đã có tài khoản? <a [routerLink]="link">Đăng nhập ngay</a>
+    </p>
+  </div>
+</div>

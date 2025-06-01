@@ -1,0 +1,212 @@
+// Variables
+$primary-blue: #2563eb;
+$secondary-blue: #3b82f6;
+$accent-blue: #60a5fa;
+$light-blue: #eff6ff;
+$hover-blue: #dbeafe;
+$dark-blue: #1e40af;
+$white: #ffffff;
+$light-gray: #f3f4f6;
+$border-color: #e5e7eb;
+$text-dark: #1f2937;
+$text-light: #6b7280;
+$error-red: #ef4444;
+
+.container {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  background-image: url("/images/background1.png");
+  background-size: cover;  background-position: bottom;
+  min-height: calc(100vh - 80px); // Changed from max-height to min-height
+  overflow-y: hidden;
+}
+
+.exam-period-info {
+  display: flex;
+  width: 90%;
+  max-width: 1200px;
+  margin-top: 20px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: $white;
+  box-shadow: 0 10px 25px rgba($dark-blue, 0.1);
+  height: fit-content;
+}
+
+.image-wrap {
+  width: 45%;
+  margin: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.form-wrap {
+  width: 55%;
+  padding: 40px;
+  background: $white;
+  overflow-y: auto; // Add scrolling if needed
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    color: $dark-blue;
+    font-size: 24px; // Reduced from 28px
+    font-weight: 600;
+    margin-bottom: 20px; // Reduced from 30px
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -8px; // Adjusted from -10px
+      left: 0;
+      width: 50px; // Reduced from 60px
+      height: 3px; // Reduced from 4px
+      background: linear-gradient(to right, $primary-blue, $accent-blue);
+      border-radius: 2px;
+    }
+  }
+
+  label {
+    font-weight: 500;
+    color: $text-dark;
+    margin-bottom: 6px; // Reduced from 8px
+    font-size: 14px; // Reduced from 15px
+  }
+
+  input {
+    padding: 12px 14px; // Reduced from 14px 16px
+    margin-bottom: 18px; // Reduced from 24px
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 14px; // Reduced from 15px
+    transition: all 0.3s ease;
+    background: $light-gray;
+
+    &:focus {
+      outline: none;
+      border-color: $accent-blue;
+      background: $white;
+      box-shadow: 0 0 0 3px rgba($accent-blue, 0.2);
+    }
+
+    &:hover:not(:focus) {
+      border-color: $secondary-blue;
+    }
+
+    &[type="datetime-local"] {
+      color: $text-dark;
+    }
+  }
+
+  .button-group {
+    margin-top: 10px;
+  }
+
+  button {
+    padding: 14px; // Reduced from 16px
+    font-size: 15px; // Reduced from 16px
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &[type="submit"] {
+      background: linear-gradient(45deg, $primary-blue, $secondary-blue);
+      color: $white;
+      box-shadow: 0 4px 12px rgba($primary-blue, 0.3);
+
+      &:hover:not(:disabled) {
+        background: linear-gradient(45deg, darken($primary-blue, 5%), darken($secondary-blue, 5%));
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba($primary-blue, 0.4);
+      }
+
+      &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+    }
+
+    &.back {
+      background: $light-gray;
+      color: $text-dark;
+      margin-top: 10px; // Reduced from 14px
+      border: 1px solid $border-color;
+
+      &:hover {
+        background: darken($light-gray, 5%);
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+// FORM VALIDATION ERROR
+.input-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px; // Reduced from 6px
+
+  .error {
+    position: absolute;
+    bottom: 6px; // Adjusted from 8px
+    left: 2px;
+    color: $error-red;
+    font-size: 11px; // Reduced from 12px
+    background: rgba($white, 0.8);
+    padding: 1px 6px; // Reduced from 2px 8px
+    border-radius: 4px;
+  }
+}
+
+.row-wrapper {
+  display: flex;
+  gap: 20px; // Reduced from 24px
+  margin-bottom: 6px; // Reduced from 8px
+
+  .input-wrapper {
+    flex: 1;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 992px) {
+  .exam-period-info {
+    flex-direction: column;
+    width: 95%;
+  }
+
+  .image-wrap, .form-wrap {
+    width: 100%;
+  }
+
+  .image-wrap img {
+    max-height: 250px; // Reduced from 300px
+  }
+}
+
+@media (max-width: 768px) {
+  .row-wrapper {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .form-wrap {
+    padding: 25px 15px; // Reduced from 30px 20px
+  }
+}

@@ -1,0 +1,80 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <!-- Main content section -->
+    <div class="login-content">
+      <div class="login-form-container">
+        <!-- Left side panel with information -->
+        <div class="info-panel">
+          <h1>Online Learning & Examination Platform</h1>
+          <p>Truy cập vào hệ thống thi trực tuyến để học tập và kiểm tra kiến thức của bạn</p>
+
+          <div class="features">
+            <div class="feature">
+              <i class="fa fa-check-circle"></i>
+              <span>Đánh giá năng lực</span>
+            </div>
+            <div class="feature">
+              <i class="fa-solid fa-clock"></i>
+              <span>Tiết kiệm thời gian</span>
+            </div>
+            <div class="feature">
+              <i class="fa fa-certificate"></i>
+              <span>Chứng nhận trực tuyến</span>
+            </div>
+            <div class="feature">
+              <i class="fa fa-users"></i>
+              <span>Đào tạo từ xa</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right side panel with form -->
+        <div class="form-panel">
+          <div class="form-header">
+            <h2><ng-content select="[login_heading]"></ng-content></h2>
+            <p class="welcome-text">Chào mừng trở lại, vui lòng đăng nhập để tiếp tục</p>
+          </div>
+
+          <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+            <div class="input-group">
+              <div class="input-wrapper">
+                <span class="input-icon"><i class="fa fa-envelope"></i></span>
+                <input formControlName="contact" placeholder="Email/ Số điện thoại" required type="text"/>
+                <div *ngIf="loginForm.get('contact')?.touched && loginForm.get('contact')?.errors" class="error-container">
+                  <small *ngIf="loginForm.get('contact')?.errors?.['required']" class="error">Liên hệ không được để trống</small>
+                  <small *ngIf="loginForm.get('contact')?.errors?.['email']" class="error">Email không hợp lệ</small>
+                </div>
+              </div>
+
+              <div class="input-wrapper">
+                <span class="input-icon"><i class="fa fa-lock"></i></span>
+                <input formControlName="password" placeholder="Mật khẩu" required type="password"/>
+                <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors" class="error-container">
+                  <small *ngIf="loginForm.get('password')?.errors?.['required']" class="error">Mật khẩu không được để trống</small>
+                </div>
+              </div>
+            </div>
+
+            <a class="forgot-password" routerLink="/forgot-password">Quên mật khẩu?</a>
+
+            <button [disabled]="loginForm.invalid" type="submit" class="login-button">
+              <span class="button-text">Đăng nhập</span>
+              <span class="button-icon"><i class="fa fa-arrow-right"></i></span>
+            </button>
+
+            <button (click)="navigateToLink()" class="role-switch-button">
+              <ng-content select="[login_heading]"></ng-content>
+              Thay đổi vai trò
+            </button>
+
+            <p class="register">Bạn chưa có tài khoản? <a [routerLink]="link" class="register-link">Đăng ký ngay</a></p>
+            <p *ngIf="loginError" class="login-error">{{ loginError }}</p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<app-loading *ngIf="loading" text="Đang đăng nhập..."></app-loading>

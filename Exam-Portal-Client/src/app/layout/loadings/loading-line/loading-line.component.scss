@@ -1,0 +1,30 @@
+.loading-bar {
+  position: fixed;
+  top: 80px; // Cách trên 80px (header)
+  left: 0;
+  width: 100%;
+  height: 5px; // Độ dày đường kẻ
+
+  background: linear-gradient(
+      90deg,
+      #04AA6DFF, // Màu chủ đạo - Xanh lá
+      #00c896, // Xanh ngọc
+      #00e0d3, // Xanh cyan
+      #4a90e2, // Xanh dương nhạt
+      #00e0d3, // Xanh cyan
+      #00c896, // Xanh ngọc
+      #04AA6DFF // Quay lại màu chủ đạo để lặp mượt
+  );
+
+  background-size: 300% 100%;
+  animation: loadingAnimation 3s infinite linear;
+}
+
+@keyframes loadingAnimation {
+  0% {
+    background-position: 0 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}

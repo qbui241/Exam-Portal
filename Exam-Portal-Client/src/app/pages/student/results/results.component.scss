@@ -1,0 +1,106 @@
+.container {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  font-size: 1.6rem;
+}
+
+.exam-file {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e5e5e5;
+  font-size: 18px;
+  color: #333;
+}
+
+.result-sheet {
+  flex: 1;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.result-content {
+  overflow-y: auto;
+  height: 100%;
+  padding: 0 0 0 20px;
+}
+
+.result-header {
+  background-color: #04aa6d;
+  color: white;
+  padding: 40px 10px 30px 10px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.result-subject {
+  padding: 20px 10px 20px 10px;
+  text-align: center;
+
+  .subject {
+    width: 100%;
+    padding: 10px 0 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 1.6rem;
+  }
+}
+
+.result-points {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #0aa35c;
+  padding: 30px 0 30px 0;
+  margin: 10px;
+  border-radius: 6px;
+}
+
+.result-info {
+  padding: 40px 0 20px 10px;
+
+  dl {
+    margin: 0;
+    width: 100%;
+
+    .row {
+      display: flex;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd; // Thêm đường gạch chân nhẹ giữa các dòng (tuỳ chỉnh)
+    }
+
+    dt {
+      flex: 1; // Chiếm không gian phù hợp
+    }
+
+    dd {
+      flex: 1;
+      text-align: left; // Căn giá trị về bên phải
+      margin: 0;
+    }
+  }
+}
+
+.return-button {
+  text-align: center;
+  padding: 25px 10px 15px 10px;
+
+  button {
+    background-color: #ccc;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+
+    &:hover {
+      background-color: #bbb;
+    }
+  }
+}

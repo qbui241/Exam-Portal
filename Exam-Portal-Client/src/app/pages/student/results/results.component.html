@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="exam-file">
+
+  </div>
+  <div class="result-sheet">
+    <div class="result-header">
+      <p>Kết quả</p>
+    </div>
+    <div class="result-content">
+      <div class="result-subject">
+        <input [value]="subject" class="subject" readonly type="text">
+      </div>
+      <div class="result-points">
+        <p>{{ points }}</p>
+      </div>
+      <div class="result-info">
+        <dl>
+          <div class="row">
+            <dt>Thời gian làm bài:</dt>
+            <dd>{{ time }}</dd>
+          </div>
+          <div class="row">
+            <dt>Thời gian nộp bài:</dt>
+            <dd>{{ timeSubmit }}</dd>
+          </div>
+          <div class="row">
+            <dt>Số câu đúng:</dt>
+            <dd>{{ numberCorrectAnswer }}</dd>
+          </div>
+          <div class="row">
+            <dt>Số câu sai:</dt>
+            <dd>{{ numberWrongAnswer }}</dd>
+          </div>
+          <div class="row">
+            <dt>Số câu chưa trả lời:</dt>
+            <dd>{{ numberNotSubmitAnswer }}</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="return-button">
+        <button (click)="return()">Quay lại</button>
+      </div>
+    </div>
+  </div>
+</div>

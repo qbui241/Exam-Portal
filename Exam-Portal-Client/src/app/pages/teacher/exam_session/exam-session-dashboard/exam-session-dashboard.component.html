@@ -1,0 +1,60 @@
+<body>
+  <header class="header">
+    <div class="wrapper-logo">
+      <div class="logo">
+        <a (click)="goBack()">Online Exam Portal</a>
+      </div>
+      <nav class="breadcrumb">
+        <span>►</span>
+        <span
+          >Kỳ thi: {{ exam_session_name }}-{{ exam_session_description }}</span
+        >
+      </nav>
+    </div>
+    <div class="return-button">
+      <button (click)="goBack()">
+        <i class="fa fa-arrow-left"></i> Quay lại
+      </button>
+    </div>
+  </header>
+
+  <div class="sidebar">
+    <ul class="navigate-option">
+      <li (click)="clickActive($event, 'home')" class="option active">
+        <i class="fa fa-home"></i> Thông tin chung
+      </li>
+      <li (click)="clickActive($event, 'student-list-point')" class="option">
+        <i class="fa fa-bar-chart"></i> Thống kê điểm
+      </li>
+      <li (click)="clickActive($event, 'exam-session')" class="option">
+        <i class="fa fa-file-text"></i> Đề thi
+      </li>
+      <li (click)="clickActive($event, 'question-bank')" class="option">
+        <i class="fa fa-database"></i> Kho câu hỏi
+      </li>
+    </ul>
+  </div>
+  <main>
+    <app-home
+      *ngIf="activeTab === 'home'"
+      [exam_session_description]="exam_session_description"
+      [exam_session_id]="exam_session_id"
+      [exam_session_name]="exam_session_name"
+    ></app-home>
+    <app-student-list-point
+      *ngIf="activeTab === 'student-list-point'"
+      [exam_description]="exam_session_description"
+      [exam_name]="exam_session_name"
+      [exam_session_id]="exam_session_id"
+    ></app-student-list-point>
+    <app-exam
+      *ngIf="activeTab === 'exam-session'"
+      [exam_session_description]="exam_session_description"
+      [exam_session_id]="exam_session_id"
+      [exam_session_name]="exam_session_name"
+    ></app-exam>
+    <app-question-bank
+      *ngIf="activeTab === 'question-bank'"
+    ></app-question-bank>
+  </main>
+</body>

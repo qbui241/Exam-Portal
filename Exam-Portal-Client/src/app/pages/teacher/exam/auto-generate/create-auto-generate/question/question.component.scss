@@ -1,0 +1,444 @@
+// Color palette
+$primary-blue: #1a56db;
+$secondary-blue: #0040a1;
+$primary-green: #008554;
+$light-blue: #eef5ff;
+$text-blue: #324053;
+$border-color: #e2e8f0;
+$success-color: #10b981;
+$danger-color: #ef4444;
+
+// Typography
+$base-font: "Roboto", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+
+li {
+  list-style: none;
+}
+
+// Responsive container
+.container {
+  width: 1140px;
+  max-width: calc(100% - 48px);
+  margin: 0 auto;
+  font-family: $base-font;
+  color: $text-blue;
+
+  @media (max-width: 576px) {
+    max-width: calc(100% - 32px);
+  }
+}
+
+// Enhanced question input section with better responsiveness
+.question-input-number {
+  position: fixed;
+  z-index: 99;
+  margin-top: 5px;
+  left: 24px;
+  width: calc(100% - 48px);
+  padding: 20px 0;
+  background: linear-gradient(135deg, $primary-blue, $secondary-blue);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba($primary-blue, 0.15);
+  overflow: hidden;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width: 992px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  }
+
+  .number-input-wrap {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+
+    @media (max-width: 576px) {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+
+    label {
+      font-size: 1.6rem;
+      color: white;
+      font-weight: 500;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+      @media (max-width: 576px) {
+        font-size: 1.4rem;
+        min-width: 70px;
+      }
+    }
+
+    // Enhanced number input
+    .number-input {
+      width: 65px;
+      height: 40px;
+      text-align: center;
+      outline: none;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 0;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: $text-blue;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+
+      @media (max-width: 576px) {
+        width: 60px;
+        height: 36px;
+        font-size: 1.4rem;
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+// Responsive button styling
+.generate-button {
+  padding: 12px 25px;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  outline: none;
+  border: none;
+  font-size: 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 992px) {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  @media (max-width: 576px) {
+    padding: 10px 15px;
+    font-size: 1.3rem;
+  }
+
+  // Add Questions button (second button)
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 4px 12px rgba(#10b981, 0.3);
+
+  // Create Questions button (first button)
+  &:first-of-type {
+    margin-left: 0;
+    background: linear-gradient(135deg, #3b82f6, #386bf6);
+    box-shadow: 0 4px 12px rgba(#3b82f6, 0.3);
+
+    @media (max-width: 992px) {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+
+    &::before {
+      content: "+";
+      margin-right: 8px;
+      font-size: 1.6rem;
+      font-weight: 400;
+    }
+  }
+
+  // Submit button (second button)
+  &:last-of-type {
+    background: linear-gradient(135deg, #f9fafb, #f3f4f6);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    color: #3b82f6; // Dark text for contrast on light background
+    border: 1px solid rgba(#10b981, 0.3);
+
+    @media (max-width: 992px) {
+      order: 1; // Put after first button on mobile
+    }
+
+    &::before {
+      content: "✓";
+      margin-right: 8px;
+      font-size: 1.4rem;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    filter: brightness(102%);
+
+    @media (max-width: 768px) {
+      transform: translateY(-2px); // Smaller hover effect on mobile
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px);
+    filter: brightness(95%);
+  }
+}
+
+// Responsive question list
+.question-list-wrap {
+  margin: 110px 0 50px 0;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    margin: 180px 0 30px 0; // More space on top for the fixed header
+  }
+
+  @media (max-width: 576px) {
+    margin: 220px 0 30px 0; // Even more space on mobile
+  }
+
+  .question-list {
+    padding: 0;
+
+    .error {
+      color: $danger-color;
+      font-size: 1.6rem;
+    }
+  }
+
+  .question {
+    width: 100%;
+    margin-bottom: 30px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border: 1px solid $border-color;
+    position: relative;
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    @media (max-width: 576px) {
+      margin-bottom: 20px;
+      border-radius: 12px;
+    }
+
+    &:hover {
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+      transform: translateY(-2px);
+
+      @media (max-width: 576px) {
+        transform: translateY(-1px); // Subtle effect on mobile
+      }
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(to bottom, $primary-blue, $secondary-blue);
+      opacity: 0.9;
+
+      @media (max-width: 576px) {
+        width: 4px; // Slightly thinner on mobile
+      }
+    }
+
+    // Enhanced question name section
+    .question-name {
+      display: flex;
+      gap: 15px;
+      width: 100%;
+      padding: 20px 24px;
+      background: linear-gradient(
+        120deg,
+        lighten($light-blue, 3%),
+        $light-blue
+      );
+      border-bottom: 1px solid $border-color;
+      font-size: 18px;
+      font-weight: 600;
+      align-items: center;
+      margin-bottom: 0;
+
+      @media (max-width: 768px) {
+        padding: 16px 20px;
+      }
+
+      @media (max-width: 576px) {
+        padding: 12px 16px;
+        gap: 10px;
+      }
+
+      .question-name-number {
+        color: $primary-blue;
+        margin: 0;
+        font-size: 1.7rem;
+
+        @media (max-width: 576px) {
+          font-size: 1.5rem;
+        }
+      }
+
+      // Enhanced question name input
+      .question-name-input {
+        flex-grow: 1;
+        outline: none;
+        border: 1px solid rgba($primary-blue, 0.2);
+        border-radius: 8px;
+        padding: 12px 16px;
+        background-color: white;
+        font-size: 1.5rem;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+
+        @media (max-width: 768px) {
+          padding: 10px 12px;
+          font-size: 1.4rem;
+        }
+
+        @media (max-width: 576px) {
+          padding: 8px 10px;
+          font-size: 1.3rem;
+        }
+
+        &:focus {
+          border-color: $primary-blue;
+          box-shadow: 0 0 0 3px rgba($primary-blue, 0.1);
+          transform: translateY(-1px);
+        }
+      }
+    }
+
+    // Enhanced correct answer label
+    .correct-answer {
+      padding: 16px 24px;
+      background-color: rgba($success-color, 0.08);
+      color: $success-color;
+      font-weight: 600;
+      font-size: 1.5rem;
+      margin: 0;
+      border-bottom: 1px solid rgba($border-color, 0.6);
+      display: flex;
+      align-items: center;
+
+      @media (max-width: 768px) {
+        padding: 14px 20px;
+        font-size: 1.4rem;
+      }
+
+      @media (max-width: 576px) {
+        padding: 12px 16px;
+        font-size: 1.3rem;
+      }
+
+      &::before {
+        content: "✓";
+        margin-right: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        background: $success-color;
+        color: white;
+        border-radius: 50%;
+        font-size: 1.2rem;
+
+        @media (max-width: 576px) {
+          width: 18px;
+          height: 18px;
+          font-size: 1rem;
+          margin-right: 8px;
+        }
+      }
+    }
+
+    // Enhanced input container
+    .input-wrap {
+      padding: 24px;
+      display: grid;
+      gap: 15px;
+
+      @media (max-width: 768px) {
+        padding: 20px;
+        gap: 12px;
+      }
+
+      @media (max-width: 576px) {
+        padding: 16px;
+        gap: 10px;
+      }
+    }
+
+    // Enhanced answer inputs
+    .answer-input {
+      width: 100%;
+      outline: none;
+      padding: 14px 18px;
+      border: 1px solid $border-color;
+      border-radius: 10px;
+      font-size: 1.5rem;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      background-color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+      @media (max-width: 768px) {
+        padding: 12px 14px;
+        font-size: 1.4rem;
+        border-radius: 8px;
+      }
+
+      @media (max-width: 576px) {
+        padding: 10px 12px;
+        font-size: 1.3rem;
+        border-radius: 6px;
+      }
+
+      &:focus {
+        border-color: $primary-blue;
+        box-shadow: 0 0 0 3px rgba($primary-blue, 0.1);
+        transform: translateY(-2px);
+
+        @media (max-width: 576px) {
+          transform: translateY(-1px);
+        }
+      }
+
+      &.correct {
+        border: 1px solid rgba($success-color, 0.4);
+        background-color: rgba($success-color, 0.03);
+        box-shadow: 0 4px 12px rgba($success-color, 0.08);
+        position: relative;
+
+        &:focus {
+          border-color: $success-color;
+          box-shadow: 0 0 0 3px rgba($success-color, 0.15);
+        }
+
+        &::after {
+          content: "✓";
+          position: absolute;
+          right: 15px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: $success-color;
+          font-weight: bold;
+
+          @media (max-width: 576px) {
+            right: 10px;
+          }
+        }
+      }
+    }
+  }
+}

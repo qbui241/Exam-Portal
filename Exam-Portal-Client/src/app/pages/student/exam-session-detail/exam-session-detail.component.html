@@ -1,0 +1,65 @@
+<div (click)="closePasswordModal($event)" class="main-container">
+  <app-header-student></app-header-student>
+  <div class="search-bar">
+    <input
+      (input)="filterExam()"
+      [(ngModel)]="searchTerm"
+      placeholder="Nhập tên hoặc mô tả bài thi để tìm kiếm..."
+      type="text"
+    />
+  </div>
+  <main (click)="closePasswordModal($event)" class="exam-detail__wrap">
+    <table>
+      <thead>
+      <tr>
+        <th>{{ this.examSession?.name }} - {{ this.examSession?.description }} / {{ this.examSession?.code }}</th>
+        <th>Dạng đề</th>
+        <th>Thời gian</th>
+        <th>Ngày bắt đầu</th>
+        <th>Ngày kết thúc</th>
+        <th>Trạng thái</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr
+        (click)="openExamWithPassword(exam , $event)"
+        *ngFor="let exam of filteredExams"
+      >
+        <td>{{ exam.name }}</td>
+        <td>{{ exam.type }}</td>
+        <td>{{ exam.duration }}</td>
+        <td>{{ exam.endDate | date: 'HH:mm dd/MM/yyyy' }}</td>
+        <td>{{ exam.startDate | date: 'HH:mm dd/MM/yyyy' }}</td>
+        <td>{{ getStatus(exam.startDate, exam.endDate) }}</td>
+      </tr>
+      </tbody>
+    </table>
+
+  </main>
+  <div #passwordForm (click)="closePasswordModal($event)" [class.visible]="isPassword" class="password-form">
+    <div (click)="$event.stopPropagation()" class="container">
+      <!-- Exam information section -->
+      <div *ngIf="selectedExam" class="exam-info">
+        <h2>{{ selectedExam.name }}</h2>
+        <div class="exam-details">
+          <p><span>Loại đề:</span> {{ selectedExam.type }}</p>
+          <p><span>Thời gian:</span> {{ selectedExam.duration }} phút</p>
+        </div>
+      </div>
+
+      <h3>Nhập mật khẩu để bắt đầu làm bài</h3>
+      <div class="input-container">
+        <input
+          #inputBox
+          (input)="onInput(i, $event)"
+          (keydown)="onKeyDown(i, $event)"
+          *ngFor="let input of inputs; let i = index"
+          class="input-box"
+          maxlength="1"
+          type="text"
+        />
+      </div>
+    </div>
+  </div>
+</div>

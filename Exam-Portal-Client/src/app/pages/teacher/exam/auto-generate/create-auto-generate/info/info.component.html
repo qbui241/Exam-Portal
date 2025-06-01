@@ -1,0 +1,160 @@
+<div class="container">
+  <div class="form-wrap">
+    <form (ngSubmit)="onSubmit()" [formGroup]="examForm">
+      <h2 class="exam-info">Thông tin đề thi</h2>
+
+      <div class="row-wrapper">
+        <!-- Tên đề thi -->
+        <div class="input-wrapper">
+          <label for="exam_name">Tên đề thi</label>
+          <input formControlName="exam_name" id="exam_name" />
+          <div class="error-wrap">
+            <div
+              *ngIf="
+                examForm.get('exam_name')?.invalid &&
+                examForm.get('exam_name')?.touched
+              "
+              class="error"
+            >
+              Tên đề không được để trống.
+            </div>
+          </div>
+        </div>
+
+        <!-- Số lượng câu hỏi -->
+        <div class="input-wrapper">
+          <label for="number_of_exam">Số đề</label>
+          <input formControlName="number_of_exam" id="number_of_exam" />
+          <div class="error-wrap">
+            <div
+              *ngIf="
+                examForm.get('number_of_exam')?.invalid &&
+                examForm.get('number_of_exam')?.touched
+              "
+              class="error"
+            >
+              Số lượng câu hỏi không được để trống.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row-wrapper">
+        <!-- Thời gian làm bài -->
+        <div class="input-wrapper">
+          <label for="exam_duration">Thời gian làm bài:</label>
+          <select formControlName="exam_duration" id="exam_duration">
+            <option value="">-- Chọn thời gian --</option>
+            <option value="15">15 phút</option>
+            <option value="30">30 phút</option>
+            <option value="60">60 phút</option>
+            <option value="90">90 phút</option>
+            <option value="120">120 phút</option>
+          </select>
+          <div class="error-wrap">
+            <div
+              *ngIf="
+                examForm.get('exam_duration')?.invalid &&
+                examForm.get('exam_duration')?.touched
+              "
+              class="error"
+            >
+              Vui lòng chọn thời gian làm bài.
+            </div>
+          </div>
+        </div>
+
+        <div class="input-wrapper">
+          <label for="exam_number_of_test">Số lượng câu hỏi</label>
+          <input
+            formControlName="exam_number_of_test"
+            id="exam_number_of_test"
+            type="text"
+          />
+          <div class="error-wrap">
+            <div
+              *ngIf="
+                examForm.get('exam_number_of_test')?.invalid &&
+                examForm.get('exam_number_of_test')?.touched
+              "
+              class="error"
+            >
+              Số đề không được để trống.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row-wrapper">
+        <!-- Môn thi -->
+        <div class="input-wrapper">
+          <label for="exam_subject">Môn thi</label>
+          <input formControlName="exam_subject" id="exam_subject" />
+          <div class="error-wrap">
+            <div
+              *ngIf="
+                examForm.get('exam_subject')?.invalid &&
+                examForm.get('exam_subject')?.touched
+              "
+              class="error"
+            >
+              Tên môn học không được để trống.
+            </div>
+          </div>
+        </div>
+
+        <!-- Mô tả -->
+        <div class="input-wrapper">
+          <label for="exam_description">Lưu ý</label>
+          <input formControlName="exam_description" id="exam_description" />
+        </div>
+      </div>
+
+      <div class="row-wrapper">
+        <!-- Thời gian bắt đầu -->
+        <div class="input-wrapper">
+          <label for="exam_start_date">Thời gian bắt đầu:</label>
+          <input
+            formControlName="exam_start_date"
+            id="exam_start_date"
+            type="datetime-local"
+          />
+          <div class="error-wrap">
+            <div
+              *ngIf="
+                examForm.get('exam_start_date')?.invalid &&
+                examForm.get('exam_start_date')?.touched
+              "
+              class="error"
+            >
+              Vui lòng chọn thời gian bắt đầu.
+            </div>
+          </div>
+        </div>
+
+        <!-- Thời gian kết thúc -->
+        <div class="input-wrapper">
+          <label for="exam_end_date">Thời gian kết thúc:</label>
+          <input
+            formControlName="exam_end_date"
+            id="exam_end_date"
+            type="datetime-local"
+          />
+          <div class="error-wrap">
+            <div
+              *ngIf="
+                examForm.get('exam_end_date')?.invalid &&
+                examForm.get('exam_end_date')?.touched
+              "
+              class="error"
+            >
+              Vui lòng chọn thời gian kết thúc.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button  [disabled]="examForm.invalid" type="submit">Tạo bài thi</button>
+    </form>
+  </div>
+</div>
